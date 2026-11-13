@@ -517,3 +517,4 @@ model AdminSettings {
 
   @@map("admin_settings")
 }
+

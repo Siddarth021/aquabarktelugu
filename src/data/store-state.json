@@ -1,0 +1,1276 @@
+{
+  "categories": [
+    {
+      "id": "cat-fish-001",
+      "name": "Live Ornamental Fish",
+      "slug": "fish",
+      "description": "Healthy, disease-free, home-bred exotic freshwater fishes acclimatized to Indian water conditions.",
+      "imageUrl": "https://images.unsplash.com/photo-1522069169874-c58ec4b76be5?auto=format&fit=crop&w=800&q=80",
+      "parentId": null,
+      "sortOrder": 1,
+      "isActive": true
+    },
+    {
+      "id": "cat-plants-002",
+      "name": "Aqua Plants",
+      "slug": "aqua-plants",
+      "description": "Submerged cultivated, snail-free live aquatic plants for lush aquascapes and natural filtration.",
+      "imageUrl": "https://images.unsplash.com/photo-1544943910-4c1dc44a053c?auto=format&fit=crop&w=800&q=80",
+      "parentId": null,
+      "sortOrder": 2,
+      "isActive": true
+    },
+    {
+      "id": "cat-acc-003",
+      "name": "Accessories & Nutrition",
+      "slug": "accessories",
+      "description": "Tested biological filters, Japanese fish nutrition, full-spectrum lights, and safe water conditioners.",
+      "imageUrl": "https://images.unsplash.com/photo-1520302630591-fd1c66edc19d?auto=format&fit=crop&w=800&q=80",
+      "parentId": null,
+      "sortOrder": 3,
+      "isActive": true
+    }
+  ],
+  "products": [
+    {
+      "id": "prod-fish-001",
+      "name": "Red Dragon Dumbo Guppy",
+      "slug": "red-dragon-guppy",
+      "subtitle": "Show-Grade Big Ear Strain | Active Swimmers",
+      "description": "Vibrant high-grade Red Dragon Dumbo Guppies bred in clean Godavari waters. Acclimated to Indian tap water conditions. Features spectacular dorsal fins with shimmering metallic red and platinum scales. Extremely hardy, peaceful community fish.",
+      "careGuide": "Temperature: 24-28°C | pH: 6.8-7.8 | Diet: Micro pellets, daphnia, live baby brine shrimp | Tank Size: Minimum 10 Gallons, gentle sponge filter recommended.",
+      "categoryId": "cat-fish-001",
+      "categoryName": "Live Ornamental Fish",
+      "isActive": true,
+      "isFeatured": true,
+      "isNewArrival": false,
+      "requiresSpecialTransit": true,
+      "minOrderQty": 1,
+      "maxOrderQty": 20,
+      "images": [
+        {
+          "id": "img-rdg-1",
+          "imageUrl": "https://images.unsplash.com/photo-1534043464124-3be32fe000c9?auto=format&fit=crop&w=800&q=80",
+          "altText": "Red Dragon Guppy Pair in planted aquarium",
+          "sortOrder": 1,
+          "isPrimary": true
+        },
+        {
+          "id": "img-rdg-2",
+          "imageUrl": "https://images.unsplash.com/photo-1522069169874-c58ec4b76be5?auto=format&fit=crop&w=800&q=80",
+          "altText": "Male Red Dragon Guppy dorsal fin closeup",
+          "sortOrder": 2,
+          "isPrimary": false
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-rdg-male",
+          "productId": "prod-fish-001",
+          "title": "Male (Show Grade)",
+          "sku": "RDG-M",
+          "gender": "Male",
+          "size": "Adult (1.5 inch)",
+          "plantPotType": null,
+          "price": 180,
+          "originalPrice": 220,
+          "isActive": true,
+          "sortOrder": 1,
+          "stock": 35,
+          "reservedStock": 0
+        },
+        {
+          "id": "var-rdg-female",
+          "productId": "prod-fish-001",
+          "title": "Female (Gravid)",
+          "sku": "RDG-F",
+          "gender": "Female",
+          "size": "Adult (1.8 inch)",
+          "plantPotType": null,
+          "price": 150,
+          "originalPrice": 180,
+          "isActive": true,
+          "sortOrder": 2,
+          "stock": 28,
+          "reservedStock": 0
+        },
+        {
+          "id": "var-rdg-pair",
+          "productId": "prod-fish-001",
+          "title": "Breeding Pair (1M + 1F)",
+          "sku": "RDG-PAIR",
+          "gender": "Pair",
+          "size": "Adult Pair",
+          "plantPotType": null,
+          "price": 320,
+          "originalPrice": 400,
+          "isActive": true,
+          "sortOrder": 3,
+          "stock": 22,
+          "reservedStock": 0
+        },
+        {
+          "id": "var-rdg-trio",
+          "productId": "prod-fish-001",
+          "title": "Breeding Trio (1M + 2F)",
+          "sku": "RDG-TRIO",
+          "gender": "Trio",
+          "size": "Adult Trio",
+          "plantPotType": null,
+          "price": 450,
+          "originalPrice": 550,
+          "isActive": true,
+          "sortOrder": 4,
+          "stock": 14,
+          "reservedStock": 0
+        }
+      ],
+      "reviewsCount": 3,
+      "averageRating": 4.9
+    },
+    {
+      "id": "prod-fish-002",
+      "name": "Dumbo Ear Halfmoon Betta",
+      "slug": "dumbo-ear-betta",
+      "subtitle": "180° Tail Spread | Feather Pectoral Fins",
+      "description": "Purebred Dumbo Ear (Big Ear) Halfmoon Betta with a stunning 180-degree tail spread and oversized white pectoral fins that flutter like elephant ears. Hand-selected for intense coloration, active vitality, and symmetrical finnage.",
+      "careGuide": "Temperature: 25-30°C | pH: 6.5-7.5 | Diet: Carnivorous micro-pellets, freeze-dried bloodworms | Tank Size: Minimum 5 Gallons, low current, conditioned with Indian almond leaf.",
+      "categoryId": "cat-fish-001",
+      "categoryName": "Live Ornamental Fish",
+      "isActive": true,
+      "isFeatured": true,
+      "isNewArrival": true,
+      "requiresSpecialTransit": true,
+      "minOrderQty": 1,
+      "maxOrderQty": 5,
+      "images": [
+        {
+          "id": "img-deb-1",
+          "imageUrl": "https://images.unsplash.com/photo-1520302630591-fd1c66edc19d?auto=format&fit=crop&w=800&q=80",
+          "altText": "Dumbo Ear Halfmoon Betta flaring",
+          "sortOrder": 1,
+          "isPrimary": true
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-deb-male",
+          "productId": "prod-fish-002",
+          "title": "Male Show Grade",
+          "sku": "DEB-M-SHOW",
+          "gender": "Male",
+          "size": "Full Grown (2.2 inch)",
+          "plantPotType": null,
+          "price": 450,
+          "originalPrice": 550,
+          "isActive": true,
+          "sortOrder": 1,
+          "stock": 12,
+          "reservedStock": 0
+        },
+        {
+          "id": "var-deb-female",
+          "productId": "prod-fish-002",
+          "title": "Female Plakat",
+          "sku": "DEB-FEMALE",
+          "gender": "Female",
+          "size": "Full Grown (2.0 inch)",
+          "plantPotType": null,
+          "price": 280,
+          "originalPrice": 350,
+          "isActive": true,
+          "sortOrder": 2,
+          "stock": 10,
+          "reservedStock": 0
+        }
+      ],
+      "reviewsCount": 3,
+      "averageRating": 4.9
+    },
+    {
+      "id": "prod-fish-003",
+      "name": "Cardinal Neon Tetra",
+      "slug": "cardinal-neon-tetra",
+      "subtitle": "Iridescent Blue & Crimson Schooling Fish",
+      "description": "Brilliant electric blue dorsal line with a continuous vibrant red lower band extending through the tail. Peaceful schooling fish that creates breathtaking synchronized swimming patterns in planted tanks.",
+      "careGuide": "Temperature: 23-28°C | pH: 5.5-7.2 | Diet: High quality micro flake/pellet | Keep in groups of 6 or more for natural behavior.",
+      "categoryId": "cat-fish-001",
+      "categoryName": "Live Ornamental Fish",
+      "isActive": true,
+      "isFeatured": false,
+      "isNewArrival": false,
+      "requiresSpecialTransit": true,
+      "minOrderQty": 1,
+      "maxOrderQty": 10,
+      "images": [
+        {
+          "id": "img-tetra-1",
+          "imageUrl": "https://images.unsplash.com/photo-1544943910-4c1dc44a053c?auto=format&fit=crop&w=800&q=80",
+          "altText": "School of Cardinal Tetras",
+          "sortOrder": 1,
+          "isPrimary": true
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-tetra-5",
+          "productId": "prod-fish-003",
+          "title": "School of 5 Fish",
+          "sku": "CNT-SCH-5",
+          "gender": null,
+          "size": "1 inch each",
+          "plantPotType": null,
+          "price": 250,
+          "originalPrice": 300,
+          "isActive": true,
+          "sortOrder": 1,
+          "stock": 35,
+          "reservedStock": 0
+        },
+        {
+          "id": "var-tetra-10",
+          "productId": "prod-fish-003",
+          "title": "School of 10 Fish (Best Value)",
+          "sku": "CNT-SCH-10",
+          "gender": null,
+          "size": "1 inch each",
+          "plantPotType": null,
+          "price": 460,
+          "originalPrice": 580,
+          "isActive": true,
+          "sortOrder": 2,
+          "stock": 25,
+          "reservedStock": 0
+        }
+      ],
+      "reviewsCount": 3,
+      "averageRating": 4.9
+    },
+    {
+      "id": "prod-fish-004",
+      "name": "Platinum Pearlscale Angelfish",
+      "slug": "platinum-angelfish",
+      "subtitle": "Graceful Textured Shimmer | Majestic Vertical Profile",
+      "description": "Stately platinum white angelfish adorned with unique diamond-textured pearl scales reflecting light like gemstones. Raised in soft warm water, ready for tranquil community tanks.",
+      "careGuide": "Temperature: 25-29°C | pH: 6.5-7.5 | Diet: Pellets, flakes, bloodworms | Deep tank recommended (18 inches height or more).",
+      "categoryId": "cat-fish-001",
+      "categoryName": "Live Ornamental Fish",
+      "isActive": true,
+      "isFeatured": false,
+      "isNewArrival": true,
+      "requiresSpecialTransit": true,
+      "minOrderQty": 1,
+      "maxOrderQty": 6,
+      "images": [
+        {
+          "id": "img-angel-1",
+          "imageUrl": "https://images.unsplash.com/photo-1522069169874-c58ec4b76be5?auto=format&fit=crop&w=800&q=80",
+          "altText": "Platinum Angelfish gliding",
+          "sortOrder": 1,
+          "isPrimary": true
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-angel-sml",
+          "productId": "prod-fish-004",
+          "title": "Juvenile (1.5 inch)",
+          "sku": "PPA-SML",
+          "gender": null,
+          "size": "1.5 inch",
+          "plantPotType": null,
+          "price": 180,
+          "originalPrice": 220,
+          "isActive": true,
+          "sortOrder": 1,
+          "stock": 20,
+          "reservedStock": 0
+        },
+        {
+          "id": "var-angel-med",
+          "productId": "prod-fish-004",
+          "title": "Semi-Adult (2.5 inch)",
+          "sku": "PPA-MED",
+          "gender": null,
+          "size": "2.5 inch",
+          "plantPotType": null,
+          "price": 320,
+          "originalPrice": 380,
+          "isActive": true,
+          "sortOrder": 2,
+          "stock": 15,
+          "reservedStock": 0
+        }
+      ],
+      "reviewsCount": 3,
+      "averageRating": 4.9
+    },
+    {
+      "id": "prod-plant-001",
+      "name": "Java Fern (Microsorum Pteropus)",
+      "slug": "java-fern",
+      "subtitle": "Indestructible Beginner Plant | Snail-Free",
+      "description": "The gold standard of beginner aquatic plants. Does not require nutrient-rich soil substrate; simply tie or glue the green rhizome to driftwood or porous aquarium stone. Tolerates a broad range of lighting and water parameters.",
+      "careGuide": "Lighting: Low to Moderate | CO2: Not required | Placement: Midground or Hardscape attachment. Never bury the rhizome in gravel or substrate.",
+      "categoryId": "cat-plants-002",
+      "categoryName": "Aqua Plants",
+      "isActive": true,
+      "isFeatured": true,
+      "isNewArrival": false,
+      "requiresSpecialTransit": false,
+      "minOrderQty": 1,
+      "maxOrderQty": 25,
+      "images": [
+        {
+          "id": "img-jf-1",
+          "imageUrl": "https://images.unsplash.com/photo-1544943910-4c1dc44a053c?auto=format&fit=crop&w=800&q=80",
+          "altText": "Lush green Java Fern leaf structure",
+          "sortOrder": 1,
+          "isPrimary": true
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-jf-bare",
+          "productId": "prod-plant-001",
+          "title": "Bare Root Rhizome (5-7 leaves)",
+          "sku": "JF-BARE",
+          "gender": null,
+          "size": null,
+          "plantPotType": "Bare Root",
+          "price": 140,
+          "originalPrice": 180,
+          "isActive": true,
+          "sortOrder": 1,
+          "stock": 45,
+          "reservedStock": 0
+        },
+        {
+          "id": "var-jf-wood",
+          "productId": "prod-plant-001",
+          "title": "Mounted on Natural Driftwood (Ready-to-place)",
+          "sku": "JF-WOOD",
+          "gender": null,
+          "size": null,
+          "plantPotType": "Driftwood Mounted",
+          "price": 290,
+          "originalPrice": 350,
+          "isActive": true,
+          "sortOrder": 2,
+          "stock": 25,
+          "reservedStock": 0
+        },
+        {
+          "id": "var-jf-pot",
+          "productId": "prod-plant-001",
+          "title": "Terracotta Pot with Rockwool",
+          "sku": "JF-POT",
+          "gender": null,
+          "size": null,
+          "plantPotType": "Clay Pot",
+          "price": 220,
+          "originalPrice": 260,
+          "isActive": true,
+          "sortOrder": 3,
+          "stock": 30,
+          "reservedStock": 0
+        }
+      ],
+      "reviewsCount": 3,
+      "averageRating": 4.9
+    },
+    {
+      "id": "prod-plant-002",
+      "name": "Amazon Sword (Echinodorus Bleheri)",
+      "slug": "amazon-sword",
+      "subtitle": "Broad Leaf Centerpiece | Heavy Nutrient Absorber",
+      "description": "Magnificent broad emerald leaves that reach towards the surface, creating natural green curtains. Excellent for absorbing excess nitrates and providing shelter for shy fish and shrimp.",
+      "careGuide": "Lighting: Moderate | Substrate: Heavy root feeder, responds well to root fertilizer tabs | Temperature: 22-28°C.",
+      "categoryId": "cat-plants-002",
+      "categoryName": "Aqua Plants",
+      "isActive": true,
+      "isFeatured": false,
+      "isNewArrival": false,
+      "requiresSpecialTransit": false,
+      "minOrderQty": 1,
+      "maxOrderQty": 15,
+      "images": [
+        {
+          "id": "img-as-1",
+          "imageUrl": "https://images.unsplash.com/photo-1544943910-4c1dc44a053c?auto=format&fit=crop&w=800&q=80",
+          "altText": "Amazon sword plant submerged",
+          "sortOrder": 1,
+          "isPrimary": true
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-as-std",
+          "productId": "prod-plant-002",
+          "title": "Standard Pot (6-8 Leaves, 15cm)",
+          "sku": "AS-STD",
+          "gender": null,
+          "size": null,
+          "plantPotType": "Standard Pot",
+          "price": 180,
+          "originalPrice": 220,
+          "isActive": true,
+          "sortOrder": 1,
+          "stock": 35,
+          "reservedStock": 0
+        },
+        {
+          "id": "var-as-xl",
+          "productId": "prod-plant-002",
+          "title": "Mother Plant XL (12+ Leaves, 25cm)",
+          "sku": "AS-XL",
+          "gender": null,
+          "size": null,
+          "plantPotType": "Mother Pot",
+          "price": 350,
+          "originalPrice": 420,
+          "isActive": true,
+          "sortOrder": 2,
+          "stock": 15,
+          "reservedStock": 0
+        }
+      ],
+      "reviewsCount": 3,
+      "averageRating": 4.9
+    },
+    {
+      "id": "prod-plant-003",
+      "name": "Anubias Barteri var. Nana",
+      "slug": "anubias-nana",
+      "subtitle": "Hardy Leathery Leaves | Shade Tolerant",
+      "description": "Anubias Nana features dense dark green foliage capable of withstanding rough fish nibbles. Extremely slow growing and thrives in shaded corners of the tank.",
+      "careGuide": "Lighting: Low | CO2: Optional | Do not bury rhizome in substrate. Tie to driftwood or lava rock.",
+      "categoryId": "cat-plants-002",
+      "categoryName": "Aqua Plants",
+      "isActive": true,
+      "isFeatured": true,
+      "isNewArrival": false,
+      "requiresSpecialTransit": false,
+      "minOrderQty": 1,
+      "maxOrderQty": 15,
+      "images": [
+        {
+          "id": "img-an-1",
+          "imageUrl": "https://images.unsplash.com/photo-1544943910-4c1dc44a053c?auto=format&fit=crop&w=800&q=80",
+          "altText": "Anubias Nana on hardscape",
+          "sortOrder": 1,
+          "isPrimary": true
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-an-ring",
+          "productId": "prod-plant-003",
+          "title": "Ceramic Bio-Ring Base",
+          "sku": "AN-RING",
+          "gender": null,
+          "size": null,
+          "plantPotType": "Ceramic Ring",
+          "price": 260,
+          "originalPrice": 320,
+          "isActive": true,
+          "sortOrder": 1,
+          "stock": 28,
+          "reservedStock": 0
+        },
+        {
+          "id": "var-an-lava",
+          "productId": "prod-plant-003",
+          "title": "Mounted on Black Volcanic Lava Rock",
+          "sku": "AN-LAVA",
+          "gender": null,
+          "size": null,
+          "plantPotType": "Lava Rock Mounted",
+          "price": 380,
+          "originalPrice": 450,
+          "isActive": true,
+          "sortOrder": 2,
+          "stock": 18,
+          "reservedStock": 0
+        }
+      ],
+      "reviewsCount": 3,
+      "averageRating": 4.9
+    },
+    {
+      "id": "prod-plant-004",
+      "name": "Monte Carlo Carpet (Micranthemum)",
+      "slug": "monte-carlo-carpet",
+      "subtitle": "Dense Foreground Lawn | Tissue Cultured",
+      "description": "The premier foreground carpet plant. Produces rounded, miniature bright-green leaves that creep over substrate and rocks to form a thick, velvety green aquatic lawn.",
+      "careGuide": "Lighting: Medium-High | CO2: Recommended for dense carpeting | Substrate: Aquasoil.",
+      "categoryId": "cat-plants-002",
+      "categoryName": "Aqua Plants",
+      "isActive": true,
+      "isFeatured": false,
+      "isNewArrival": true,
+      "requiresSpecialTransit": false,
+      "minOrderQty": 1,
+      "maxOrderQty": 10,
+      "images": [
+        {
+          "id": "img-mc-1",
+          "imageUrl": "https://images.unsplash.com/photo-1544943910-4c1dc44a053c?auto=format&fit=crop&w=800&q=80",
+          "altText": "Monte Carlo carpet in aquascape",
+          "sortOrder": 1,
+          "isPrimary": true
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-mc-cup",
+          "productId": "prod-plant-004",
+          "title": "In-Vitro Tissue Culture Cup (100% Snail & Algae Free)",
+          "sku": "MC-CUP",
+          "gender": null,
+          "size": null,
+          "plantPotType": "Tissue Culture Cup",
+          "price": 240,
+          "originalPrice": 290,
+          "isActive": true,
+          "sortOrder": 1,
+          "stock": 30,
+          "reservedStock": 0
+        }
+      ],
+      "reviewsCount": 3,
+      "averageRating": 4.9
+    },
+    {
+      "id": "prod-acc-001",
+      "name": "Ultra-Quiet Biochemical Sponge Filter",
+      "slug": "sponge-filter",
+      "subtitle": "Safe for Fry & Shrimp | Multi-Layer Porous Foam",
+      "description": "High performance biochemical sponge filter powered by an aquarium air pump. Traps floating debris while cultivating billions of beneficial nitrifying bacteria. Gentle gentle flow protects tiny guppy fry and dwarf shrimp.",
+      "careGuide": "Rinse foam with aquarium tank water during water changes every 3-4 weeks. Never rinse in chlorinated tap water.",
+      "categoryId": "cat-acc-003",
+      "categoryName": "Accessories & Nutrition",
+      "isActive": true,
+      "isFeatured": true,
+      "isNewArrival": false,
+      "requiresSpecialTransit": false,
+      "minOrderQty": 1,
+      "maxOrderQty": 30,
+      "images": [
+        {
+          "id": "img-spf-1",
+          "imageUrl": "https://images.unsplash.com/photo-1520302630591-fd1c66edc19d?auto=format&fit=crop&w=800&q=80",
+          "altText": "Aquarium biochemical sponge filter",
+          "sortOrder": 1,
+          "isPrimary": true
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-spf-single",
+          "productId": "prod-acc-001",
+          "title": "Single Sponge Nano (Tanks up to 40L)",
+          "sku": "SPF-SINGLE",
+          "gender": null,
+          "size": "Single Sponge",
+          "plantPotType": null,
+          "price": 190,
+          "originalPrice": 240,
+          "isActive": true,
+          "sortOrder": 1,
+          "stock": 50,
+          "reservedStock": 0
+        },
+        {
+          "id": "var-spf-double",
+          "productId": "prod-acc-001",
+          "title": "Double Sponge with Ceramic Media Chambers (Up to 120L)",
+          "sku": "SPF-DOUBLE",
+          "gender": null,
+          "size": "Double Sponge + Media",
+          "plantPotType": null,
+          "price": 340,
+          "originalPrice": 420,
+          "isActive": true,
+          "sortOrder": 2,
+          "stock": 40,
+          "reservedStock": 0
+        }
+      ],
+      "reviewsCount": 3,
+      "averageRating": 4.9
+    },
+    {
+      "id": "prod-acc-002",
+      "name": "Hikari Micro Pellets Tropical Diet",
+      "slug": "hikari-micro-pellets",
+      "subtitle": "Multi-Colored Micro Granules | Made in Japan",
+      "description": "World-renowned daily diet formulated specifically for small-mouthed tropical fish. Features 3 distinct color pellets: red for animal protein, green for vegetable nutrients, and yellow for vital vitamins and spirulina.",
+      "careGuide": "Feed 2-3 times daily the amount your fish will consume completely in 2 minutes. Does not cloud water.",
+      "categoryId": "cat-acc-003",
+      "categoryName": "Accessories & Nutrition",
+      "isActive": true,
+      "isFeatured": true,
+      "isNewArrival": false,
+      "requiresSpecialTransit": false,
+      "minOrderQty": 1,
+      "maxOrderQty": 20,
+      "images": [
+        {
+          "id": "img-hmp-1",
+          "imageUrl": "https://images.unsplash.com/photo-1520302630591-fd1c66edc19d?auto=format&fit=crop&w=800&q=80",
+          "altText": "Hikari Micro Pellets fish food pack",
+          "sortOrder": 1,
+          "isPrimary": true
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-hmp-45g",
+          "productId": "prod-acc-002",
+          "title": "45g Stay-Fresh Resealable Pouch",
+          "sku": "HMP-45G",
+          "gender": null,
+          "size": "45g",
+          "plantPotType": null,
+          "price": 380,
+          "originalPrice": 450,
+          "isActive": true,
+          "sortOrder": 1,
+          "stock": 75,
+          "reservedStock": 0
+        },
+        {
+          "id": "var-hmp-100g",
+          "productId": "prod-acc-002",
+          "title": "100g Economy Tub (Best Per-Gram Value)",
+          "sku": "HMP-100G",
+          "gender": null,
+          "size": "100g",
+          "plantPotType": null,
+          "price": 720,
+          "originalPrice": 850,
+          "isActive": true,
+          "sortOrder": 2,
+          "stock": 35,
+          "reservedStock": 0
+        }
+      ],
+      "reviewsCount": 3,
+      "averageRating": 4.9
+    },
+    {
+      "id": "prod-acc-003",
+      "name": "Full Spectrum Planted Aquarium LED Light",
+      "slug": "aquarium-led-plant-light",
+      "subtitle": "6500K Daylight + 660nm Deep Red LEDs",
+      "description": "Precision-engineered aluminum alloy LED fixture promoting vibrant photosynthesis without encouraging nuisance green hair algae. Extendable stainless brackets fit various tank rim widths.",
+      "careGuide": "Ideal photo-period: 6 to 8 hours daily on an automatic timer.",
+      "categoryId": "cat-acc-003",
+      "categoryName": "Accessories & Nutrition",
+      "isActive": true,
+      "isFeatured": false,
+      "isNewArrival": true,
+      "requiresSpecialTransit": false,
+      "minOrderQty": 1,
+      "maxOrderQty": 5,
+      "images": [
+        {
+          "id": "img-led-1",
+          "imageUrl": "https://images.unsplash.com/photo-1520302630591-fd1c66edc19d?auto=format&fit=crop&w=800&q=80",
+          "altText": "Slim LED planted aquarium fixture",
+          "sortOrder": 1,
+          "isPrimary": true
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-led-30cm",
+          "productId": "prod-acc-003",
+          "title": "30-45cm Extendable (14W High PAR)",
+          "sku": "LED-30CM",
+          "gender": null,
+          "size": "30cm",
+          "plantPotType": null,
+          "price": 850,
+          "originalPrice": 1100,
+          "isActive": true,
+          "sortOrder": 1,
+          "stock": 20,
+          "reservedStock": 0
+        },
+        {
+          "id": "var-led-60cm",
+          "productId": "prod-acc-003",
+          "title": "60-75cm Extendable (24W High PAR)",
+          "sku": "LED-60CM",
+          "gender": null,
+          "size": "60cm",
+          "plantPotType": null,
+          "price": 1450,
+          "originalPrice": 1800,
+          "isActive": true,
+          "sortOrder": 2,
+          "stock": 12,
+          "reservedStock": 0
+        }
+      ],
+      "reviewsCount": 3,
+      "averageRating": 4.9
+    },
+    {
+      "id": "prod-acc-004",
+      "name": "Seachem Prime Complete Water Conditioner",
+      "slug": "seachem-prime",
+      "subtitle": "Instant Dechlorinator & Heavy Metal Neutralizer",
+      "description": "The gold standard concentrated water conditioner. Instantly neutralizes chlorine, chloramines, and binds toxic ammonia, nitrite, and heavy metals found in Indian municipal tap water.",
+      "careGuide": "Dosage: 5ml treats 200 Liters (50 US gallons) of new water during tank setup or water change.",
+      "categoryId": "cat-acc-003",
+      "categoryName": "Accessories & Nutrition",
+      "isActive": true,
+      "isFeatured": true,
+      "isNewArrival": false,
+      "requiresSpecialTransit": false,
+      "minOrderQty": 1,
+      "maxOrderQty": 10,
+      "images": [
+        {
+          "id": "img-prime-1",
+          "imageUrl": "https://images.unsplash.com/photo-1520302630591-fd1c66edc19d?auto=format&fit=crop&w=800&q=80",
+          "altText": "Seachem Prime bottle",
+          "sortOrder": 1,
+          "isPrimary": true
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-prime-100ml",
+          "productId": "prod-acc-004",
+          "title": "100ml Bottle (Treats 4,000 Liters)",
+          "sku": "PRIME-100ML",
+          "gender": null,
+          "size": "100ml",
+          "plantPotType": null,
+          "price": 480,
+          "originalPrice": 560,
+          "isActive": true,
+          "sortOrder": 1,
+          "stock": 45,
+          "reservedStock": 0
+        },
+        {
+          "id": "var-prime-250ml",
+          "productId": "prod-acc-004",
+          "title": "250ml Bottle (Treats 10,000 Liters)",
+          "sku": "PRIME-250ML",
+          "gender": null,
+          "size": "250ml",
+          "plantPotType": null,
+          "price": 890,
+          "originalPrice": 1050,
+          "isActive": true,
+          "sortOrder": 2,
+          "stock": 25,
+          "reservedStock": 0
+        }
+      ],
+      "reviewsCount": 3,
+      "averageRating": 4.9
+    }
+  ],
+  "combos": [
+    {
+      "id": "combo-starter-001",
+      "title": "Beginner Aquarium Combo",
+      "slug": "beginner-aquarium-combo",
+      "description": "Everything you need to launch a thriving, low-maintenance planted aquarium: 1 Pair Red Dragon Guppies, 1 Mounted Java Fern on Natural Driftwood, 1 Double Biochemical Sponge Filter, and 1 pouch Hikari Micro Pellets (45g).",
+      "imageUrl": "https://images.unsplash.com/photo-1522069169874-c58ec4b76be5?auto=format&fit=crop&w=800&q=80",
+      "comboPrice": 1049,
+      "originalPrice": 1330,
+      "stockLimit": 15,
+      "isActive": true,
+      "items": [
+        {
+          "id": "combo-item-1",
+          "productId": "prod-fish-001",
+          "productName": "Red Dragon Dumbo Guppy",
+          "variantId": "var-rdg-pair",
+          "variantTitle": "Breeding Pair (1M + 1F)",
+          "quantity": 1
+        },
+        {
+          "id": "combo-item-2",
+          "productId": "prod-plant-001",
+          "productName": "Java Fern (Microsorum Pteropus)",
+          "variantId": "var-jf-wood",
+          "variantTitle": "Mounted on Natural Driftwood",
+          "quantity": 1
+        },
+        {
+          "id": "combo-item-3",
+          "productId": "prod-acc-001",
+          "productName": "Ultra-Quiet Biochemical Sponge Filter",
+          "variantId": "var-spf-double",
+          "variantTitle": "Double Sponge with Ceramic Media",
+          "quantity": 1
+        },
+        {
+          "id": "combo-item-4",
+          "productId": "prod-acc-002",
+          "productName": "Hikari Micro Pellets Tropical Diet",
+          "variantId": "var-hmp-45g",
+          "variantTitle": "45g Stay-Fresh Resealable Pouch",
+          "quantity": 1
+        }
+      ]
+    },
+    {
+      "id": "combo-betta-002",
+      "title": "Betta Nano Sanctuary Bundle",
+      "slug": "betta-nano-sanctuary",
+      "description": "An elegant nano aquatic setup tailored for a single centerpiece Betta: 1 Show-Grade Dumbo Ear Halfmoon Betta, 1 Anubias Nana on Black Volcanic Lava Rock, 1 Nano Sponge Filter, and Seachem Prime (100ml).",
+      "imageUrl": "https://images.unsplash.com/photo-1520302630591-fd1c66edc19d?auto=format&fit=crop&w=800&q=80",
+      "comboPrice": 1199,
+      "originalPrice": 1500,
+      "stockLimit": 10,
+      "isActive": true,
+      "items": [
+        {
+          "id": "combo-item-5",
+          "productId": "prod-fish-002",
+          "productName": "Dumbo Ear Halfmoon Betta",
+          "variantId": "var-deb-male",
+          "variantTitle": "Male Show Grade",
+          "quantity": 1
+        },
+        {
+          "id": "combo-item-6",
+          "productId": "prod-plant-003",
+          "productName": "Anubias Barteri var. Nana",
+          "variantId": "var-an-lava",
+          "variantTitle": "Mounted on Black Volcanic Lava Rock",
+          "quantity": 1
+        },
+        {
+          "id": "combo-item-7",
+          "productId": "prod-acc-001",
+          "productName": "Ultra-Quiet Biochemical Sponge Filter",
+          "variantId": "var-spf-single",
+          "variantTitle": "Single Sponge Nano",
+          "quantity": 1
+        },
+        {
+          "id": "combo-item-8",
+          "productId": "prod-acc-004",
+          "productName": "Seachem Prime Complete Water Conditioner",
+          "variantId": "var-prime-100ml",
+          "variantTitle": "100ml Bottle",
+          "quantity": 1
+        }
+      ]
+    }
+  ],
+  "promotions": [
+    {
+      "id": "promo-welcome10",
+      "title": "Welcome Aqua Enthusiast (10% Off)",
+      "code": "WELCOME10",
+      "description": "10% off your entire order on purchases above ₹499 (Max savings ₹200).",
+      "discountType": "PERCENTAGE",
+      "discountValue": 10,
+      "minOrderValue": 499,
+      "maxDiscount": 200,
+      "usageLimit": 1000,
+      "timesUsed": 42,
+      "isActive": true
+    },
+    {
+      "id": "promo-aqua50",
+      "title": "Flat ₹50 Aqua Discount",
+      "code": "AQUA50",
+      "description": "Flat ₹50 instant discount on orders above ₹500.",
+      "discountType": "FLAT",
+      "discountValue": 50,
+      "minOrderValue": 500,
+      "maxDiscount": 50,
+      "usageLimit": 500,
+      "timesUsed": 68,
+      "isActive": true
+    },
+    {
+      "id": "promo-monsoon20",
+      "title": "Monsoon Aquascape Bonanza (20% Off)",
+      "code": "MONSOON20",
+      "description": "20% off for large orders above ₹1,200 (Max savings ₹500).",
+      "discountType": "PERCENTAGE",
+      "discountValue": 20,
+      "minOrderValue": 1200,
+      "maxDiscount": 500,
+      "usageLimit": 200,
+      "timesUsed": 19,
+      "isActive": true
+    },
+    {
+      "id": "promo-freeship",
+      "title": "Free Express Transit (₹100 Off)",
+      "code": "FREESHIP",
+      "description": "Flat ₹100 transit discount on orders above ₹999.",
+      "discountType": "FLAT",
+      "discountValue": 100,
+      "minOrderValue": 999,
+      "maxDiscount": 100,
+      "usageLimit": 500,
+      "timesUsed": 31,
+      "isActive": true
+    }
+  ],
+  "carts": {},
+  "orders": [
+    {
+      "id": "order-hist-001",
+      "orderNumber": "ABT-2026-104921",
+      "status": "DELIVERED",
+      "customerName": "Ramesh Rao",
+      "customerPhone": "+919848022338",
+      "customerEmail": "ramesh.aquaguy@gmail.com",
+      "shippingAddress": {
+        "recipientName": "Ramesh Rao",
+        "phone": "+919848022338",
+        "street": "Door No. 4-21/A, Near Krishna River Bund, Gandhinagar",
+        "landmark": "Opposite Rama Temple",
+        "city": "Vijayawada",
+        "state": "Andhra Pradesh",
+        "postalCode": "520003"
+      },
+      "transitMethod": "RAILWAY_PARCEL",
+      "subtotal": 610,
+      "discountAmount": 50,
+      "shippingFee": 120,
+      "totalAmount": 680,
+      "paymentStatus": "PAID",
+      "razorpayOrderId": "order_mock_scr_104921",
+      "adminNotes": "Packed in double oxygenated polybags with styrofoam insulation box.",
+      "items": [
+        {
+          "id": "oi-001-1",
+          "productId": "prod-fish-001",
+          "variantId": "var-rdg-pair",
+          "productName": "Red Dragon Dumbo Guppy",
+          "variantTitle": "Breeding Pair (1M + 1F)",
+          "priceSnapshot": 320,
+          "quantity": 1,
+          "totalSnapshot": 320
+        },
+        {
+          "id": "oi-001-2",
+          "productId": "prod-plant-001",
+          "variantId": "var-jf-wood",
+          "productName": "Java Fern (Microsorum Pteropus)",
+          "variantTitle": "Mounted on Natural Driftwood",
+          "priceSnapshot": 290,
+          "quantity": 1,
+          "totalSnapshot": 290
+        }
+      ],
+      "shipment": {
+        "id": "ship-001",
+        "orderId": "order-hist-001",
+        "trackingNumber": "ABT-TRK-782190",
+        "transportMethod": "RAILWAY_PARCEL",
+        "operatorName": "South Central Railway - Godavari Express Parcel Van",
+        "departureLocation": "Secunderabad Railway Junction (SC)",
+        "destinationStation": "Vijayawada Railway Junction (BZA) Parcel Office",
+        "parcelReceiptNumber": "SCR-BZA-PARCEL-88192",
+        "dispatchDate": "2026-11-05T06:30:00Z",
+        "expectedArrivalDate": "2026-11-05T13:45:00Z",
+        "notes": "Consignee picked up safely at BZA Station Parcel Gate #2. 100% live arrival verified."
+      },
+      "cancellationRequested": false,
+      "createdAt": "2026-11-04T10:15:00Z"
+    },
+    {
+      "id": "order-hist-002",
+      "orderNumber": "ABT-2026-209843",
+      "status": "SHIPPED",
+      "customerName": "Suresh Varma",
+      "customerPhone": "+919440187654",
+      "customerEmail": "suresh.varma@rediffmail.com",
+      "shippingAddress": {
+        "recipientName": "Suresh Varma",
+        "phone": "+919440187654",
+        "street": "Flat 302, Godavari Heights, Danavaipeta",
+        "landmark": "Near Devi Chowk",
+        "city": "Rajahmundry",
+        "state": "Andhra Pradesh",
+        "postalCode": "533103"
+      },
+      "transitMethod": "BUS_PARCEL",
+      "subtotal": 790,
+      "discountAmount": 0,
+      "shippingFee": 100,
+      "totalAmount": 890,
+      "paymentStatus": "PAID",
+      "razorpayOrderId": "order_mock_apsrtc_209843",
+      "adminNotes": "Dispatched via APSRTC Garuda Cargo parcel counter.",
+      "items": [
+        {
+          "id": "oi-002-1",
+          "productId": "prod-fish-002",
+          "variantId": "var-deb-male",
+          "productName": "Dumbo Ear Halfmoon Betta",
+          "variantTitle": "Male Show Grade",
+          "priceSnapshot": 450,
+          "quantity": 1,
+          "totalSnapshot": 450
+        },
+        {
+          "id": "oi-002-2",
+          "productId": "prod-acc-001",
+          "variantId": "var-spf-double",
+          "productName": "Ultra-Quiet Biochemical Sponge Filter",
+          "variantTitle": "Double Sponge with Ceramic Media",
+          "priceSnapshot": 340,
+          "quantity": 1,
+          "totalSnapshot": 340
+        }
+      ],
+      "shipment": {
+        "id": "ship-002",
+        "orderId": "order-hist-002",
+        "trackingNumber": "ABT-TRK-491024",
+        "transportMethod": "BUS_PARCEL",
+        "operatorName": "APSRTC Garuda Luxury Bus Cargo Service",
+        "departureLocation": "MGBS Bus Station, Hyderabad (Counter 12)",
+        "destinationStation": "Rajahmundry Central Bus Stand Parcel Office",
+        "parcelReceiptNumber": "APSRTC-LR-992381",
+        "dispatchDate": "2026-11-12T21:00:00Z",
+        "expectedArrivalDate": "2026-11-13T07:00:00Z",
+        "notes": "Departs on overnight service. Please carry Govt ID and LR receipt copy for parcel collection."
+      },
+      "cancellationRequested": false,
+      "createdAt": "2026-11-12T14:30:00Z"
+    },
+    {
+      "id": "order-hist-003",
+      "orderNumber": "ABT-2026-302194",
+      "status": "PREPARING",
+      "customerName": "Lakshmi Priya",
+      "customerPhone": "+919701234567",
+      "customerEmail": "lakshmi.priya@outlook.com",
+      "shippingAddress": {
+        "recipientName": "Lakshmi Priya",
+        "phone": "+919701234567",
+        "street": "House 12-4, Tilak Road, Balaji Nagar",
+        "landmark": "Beside SBI Branch",
+        "city": "Tirupati",
+        "state": "Andhra Pradesh",
+        "postalCode": "517501"
+      },
+      "transitMethod": "BUS_PARCEL",
+      "subtotal": 1049,
+      "discountAmount": 104.9,
+      "shippingFee": 100,
+      "totalAmount": 1044.1,
+      "paymentStatus": "PAID",
+      "razorpayOrderId": "order_mock_prep_302194",
+      "adminNotes": "Customer requested evening bus parcel dispatch.",
+      "items": [
+        {
+          "id": "oi-003-1",
+          "productId": "prod-fish-001",
+          "variantId": "var-rdg-pair",
+          "productName": "Red Dragon Dumbo Guppy",
+          "variantTitle": "Breeding Pair (1M + 1F)",
+          "priceSnapshot": 320,
+          "quantity": 1,
+          "totalSnapshot": 320
+        },
+        {
+          "id": "oi-003-2",
+          "productId": "prod-plant-001",
+          "variantId": "var-jf-wood",
+          "productName": "Java Fern (Microsorum Pteropus)",
+          "variantTitle": "Mounted on Natural Driftwood",
+          "priceSnapshot": 290,
+          "quantity": 1,
+          "totalSnapshot": 290
+        },
+        {
+          "id": "oi-003-3",
+          "productId": "prod-acc-001",
+          "variantId": "var-spf-double",
+          "productName": "Ultra-Quiet Biochemical Sponge Filter",
+          "variantTitle": "Double Sponge with Ceramic Media",
+          "priceSnapshot": 340,
+          "quantity": 1,
+          "totalSnapshot": 340
+        },
+        {
+          "id": "oi-003-4",
+          "productId": "prod-acc-002",
+          "variantId": "var-hmp-45g",
+          "productName": "Hikari Micro Pellets Tropical Diet",
+          "variantTitle": "45g Stay-Fresh Resealable Pouch",
+          "priceSnapshot": 380,
+          "quantity": 1,
+          "totalSnapshot": 380
+        }
+      ],
+      "shipment": null,
+      "cancellationRequested": false,
+      "createdAt": "2026-11-13T09:20:00Z"
+    },
+    {
+      "id": "order-hist-004",
+      "orderNumber": "ABT-2026-401923",
+      "status": "PENDING",
+      "customerName": "Venkat Naidu",
+      "customerPhone": "+919123456780",
+      "customerEmail": "venkat.naidu@gmail.com",
+      "shippingAddress": {
+        "recipientName": "Venkat Naidu",
+        "phone": "+919123456780",
+        "street": "Plot 88, Green Meadows Colony",
+        "landmark": "Near Water Tank",
+        "city": "Kurnool",
+        "state": "Andhra Pradesh",
+        "postalCode": "518002"
+      },
+      "transitMethod": "BUS_PARCEL",
+      "subtotal": 890,
+      "discountAmount": 0,
+      "shippingFee": 80,
+      "totalAmount": 970,
+      "paymentStatus": "PENDING",
+      "razorpayOrderId": "order_mock_pend_401923",
+      "adminNotes": "Awaiting customer payment authorization.",
+      "items": [
+        {
+          "id": "oi-004-1",
+          "productId": "prod-acc-004",
+          "variantId": "var-prime-250ml",
+          "productName": "Seachem Prime Complete Water Conditioner",
+          "variantTitle": "250ml Bottle (Treats 10,000 Liters)",
+          "priceSnapshot": 890,
+          "quantity": 1,
+          "totalSnapshot": 890
+        }
+      ],
+      "shipment": null,
+      "cancellationRequested": false,
+      "createdAt": "2026-11-13T12:05:00Z"
+    }
+  ],
+  "shipments": [
+    {
+      "id": "ship-001",
+      "orderId": "order-hist-001",
+      "trackingNumber": "ABT-TRK-782190",
+      "transportMethod": "RAILWAY_PARCEL",
+      "operatorName": "South Central Railway - Godavari Express Parcel Van",
+      "departureLocation": "Secunderabad Railway Junction (SC)",
+      "destinationStation": "Vijayawada Railway Junction (BZA) Parcel Office",
+      "parcelReceiptNumber": "SCR-BZA-PARCEL-88192",
+      "dispatchDate": "2026-11-05T06:30:00Z",
+      "expectedArrivalDate": "2026-11-05T13:45:00Z",
+      "notes": "Consignee picked up safely at BZA Station Parcel Gate #2. 100% live arrival verified."
+    },
+    {
+      "id": "ship-002",
+      "orderId": "order-hist-002",
+      "trackingNumber": "ABT-TRK-491024",
+      "transportMethod": "BUS_PARCEL",
+      "operatorName": "APSRTC Garuda Luxury Bus Cargo Service",
+      "departureLocation": "MGBS Bus Station, Hyderabad (Counter 12)",
+      "destinationStation": "Rajahmundry Central Bus Stand Parcel Office",
+      "parcelReceiptNumber": "APSRTC-LR-992381",
+      "dispatchDate": "2026-11-12T21:00:00Z",
+      "expectedArrivalDate": "2026-11-13T07:00:00Z",
+      "notes": "Departs on overnight service. Please carry Govt ID and LR receipt copy for parcel collection."
+    }
+  ],
+  "cancellations": [],
+  "reviews": [
+    {
+      "id": "rev-1794577802304",
+      "productId": "prod-fish-001",
+      "productName": "Red Dragon Dumbo Guppy",
+      "customerName": "Random Visitor",
+      "rating": 4,
+      "title": null,
+      "comment": "Looks good on website",
+      "imageUrls": [],
+      "isVerifiedPurchase": false,
+      "isApproved": true,
+      "createdAt": "2026-11-13T13:50:02.304Z"
+    },
+    {
+      "id": "rev-1794577802301",
+      "productId": "prod-fish-001",
+      "productName": "Red Dragon Dumbo Guppy",
+      "customerName": "Ramesh Rao",
+      "rating": 5,
+      "title": "Verified purchase test",
+      "comment": "Super healthy fish, arrived active in Vijayawada!",
+      "imageUrls": [],
+      "isVerifiedPurchase": true,
+      "isApproved": true,
+      "createdAt": "2026-11-13T13:50:02.301Z"
+    },
+    {
+      "id": "rev-001",
+      "productId": "prod-fish-001",
+      "productName": "Red Dragon Dumbo Guppy",
+      "profileId": "profile-customer-001",
+      "customerName": "Ramesh Rao",
+      "rating": 5,
+      "title": "Flawless Live Arrival in Vijayawada via Train Parcel!",
+      "comment": "Received the Red Dragon pair via Godavari Express parcel service. Packing with oxygen and styrofoam box was top class. Both male and female are extremely active and feeding happily. Best place for quality guppies in Telugu states!",
+      "imageUrls": [
+        "https://images.unsplash.com/photo-1534043464124-3be32fe000c9?auto=format&fit=crop&w=800&q=80"
+      ],
+      "isVerifiedPurchase": true,
+      "isApproved": true,
+      "createdAt": "2026-11-06T15:30:00Z"
+    },
+    {
+      "id": "rev-002",
+      "productId": "prod-fish-002",
+      "productName": "Dumbo Ear Halfmoon Betta",
+      "profileId": "profile-customer-001",
+      "customerName": "Praveen V.",
+      "rating": 5,
+      "title": "Incredible Dumbo Ear fin spread",
+      "comment": "The big ear spread on this male Betta is magnificent. Acclimated in 30 minutes, flaring aggressively and building bubble nests already.",
+      "imageUrls": [],
+      "isVerifiedPurchase": true,
+      "isApproved": true,
+      "createdAt": "2026-11-08T11:20:00Z"
+    },
+    {
+      "id": "rev-003",
+      "productId": "prod-plant-001",
+      "productName": "Java Fern (Microsorum Pteropus)",
+      "profileId": "profile-customer-001",
+      "customerName": "Anita K.",
+      "rating": 5,
+      "title": "Lush green driftwood mounted Java Fern",
+      "comment": "Zero snails, completely fresh and green. Placed it right in my low-tech tank and it looks splendid.",
+      "imageUrls": [],
+      "isVerifiedPurchase": true,
+      "isApproved": true,
+      "createdAt": "2026-11-09T17:45:00Z"
+    }
+  ],
+  "priceHistory": [],
+  "inventoryMovements": [],
+  "processedPaymentEvents": [
+    "evt_test_1794577802289"
+  ],
+  "adminSettings": {
+    "store_name": "AquaBark Telugu",
+    "whatsapp_support_number": "+919876543210",
+    "dispatch_hubs": "Secunderabad (SCR), MGBS Hyderabad (APSRTC/TSRTC), Rajahmundry (APSRTC)",
+    "live_arrival_guarantee_hours": "2"
+  }
+}

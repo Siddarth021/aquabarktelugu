@@ -170,3 +170,105 @@ export interface OrderDTO {
   cancellationRequested?: boolean;
   createdAt: string;
 }
+
+export type CancellationStatus = 'REQUESTED' | 'APPROVED' | 'REJECTED';
+
+export interface CancellationRequestDTO {
+  id: string;
+  orderId: string;
+  orderNumber: string;
+  profileId?: string | null;
+  customerName: string;
+  customerPhone: string;
+  reason: string;
+  explanation?: string | null;
+  status: CancellationStatus;
+  adminResponse?: string | null;
+  isStockRestored: boolean;
+  refundStatus?: string | null;
+  createdAt: string;
+  resolvedAt?: string | null;
+}
+
+export interface PromotionDTO {
+  id: string;
+  title: string;
+  code: string;
+  description?: string | null;
+  discountType: DiscountType;
+  discountValue: number;
+  minOrderValue?: number | null;
+  maxDiscount?: number | null;
+  usageLimit?: number | null;
+  timesUsed: number;
+  isActive: boolean;
+  startDate?: string | null;
+  endDate?: string | null;
+}
+
+export interface ProductReviewDTO {
+  id: string;
+  productId: string;
+  productName?: string;
+  profileId?: string;
+  customerName?: string;
+  rating: number;
+  title?: string | null;
+  comment: string;
+  imageUrls?: string[];
+  isVerifiedPurchase: boolean;
+  isApproved: boolean;
+  createdAt: string;
+}
+
+export interface CartDTO {
+  id?: string;
+  sessionToken: string;
+  items: CartItemDTO[];
+  subtotal: number;
+  itemCount: number;
+}
+
+export interface PricingCalculationResult {
+  subtotal: number;
+  discountAmount: number;
+  appliedCoupon?: {
+    code: string;
+    discountType: DiscountType;
+    discountValue: number;
+    savings: number;
+  } | null;
+  shippingFee: number;
+  totalAmount: number;
+  requiresSpecialTransit: boolean;
+  eligibleTransitMethods: TransportMethod[];
+  currency: string;
+}
+
+export interface CreateOrderInput {
+  customerName: string;
+  customerPhone: string;
+  customerEmail?: string;
+  shippingAddress: ShippingAddressDTO;
+  transitMethod: TransportMethod;
+  cartItems: {
+    variantId: string;
+    quantity: number;
+  }[];
+  couponCode?: string;
+  adminNotes?: string;
+}
+
+export interface CreateShipmentInput {
+  orderId: string;
+  transportMethod: TransportMethod;
+  operatorName: string;
+  departureLocation: string;
+  destinationStation: string;
+  parcelReceiptNumber?: string;
+  dispatchDate: string;
+  expectedArrivalDate?: string;
+  notes?: string;
+}
+
+
