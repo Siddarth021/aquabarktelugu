@@ -174,11 +174,11 @@ export function AdminHeader({
                 className="flex items-center gap-2 p-1.5 sm:px-3 sm:py-1.5 rounded-2xl hover:bg-slate-100 border border-transparent hover:border-slate-200 transition-colors cursor-pointer"
               >
                 <div className="w-8 h-8 rounded-xl bg-aquabark-dark text-white flex items-center justify-center text-xs font-bold shadow-2xs">
-                  A
+                  GS
                 </div>
                 <div className="hidden sm:flex flex-col text-left">
-                  <span className="text-xs font-bold text-slate-800 leading-tight">AquaBark Admin</span>
-                  <span className="text-[10px] text-slate-400">Owner Access</span>
+                  <span className="text-xs font-bold text-slate-800 leading-tight">Gundeti Siddarth</span>
+                  <span className="text-[10px] text-slate-400">Store Owner</span>
                 </div>
                 <ChevronDown className="w-3.5 h-3.5 text-slate-400 hidden sm:block" />
               </button>
@@ -187,7 +187,7 @@ export function AdminHeader({
               {profileOpen && (
                 <div className="absolute right-0 mt-2 w-56 bg-white rounded-3xl shadow-xl border border-aquabark-border p-2 z-50 animate-in fade-in slide-in-from-top-2">
                   <div className="px-3 py-2 border-b border-slate-100">
-                    <span className="text-xs font-bold text-slate-800 block">Signed in as Admin</span>
+                    <span className="text-xs font-bold text-slate-800 block">Gundeti Siddarth (Admin)</span>
                     <span className="text-[11px] text-slate-400">aquabarktelugu.com</span>
                   </div>
 

@@ -70,9 +70,9 @@ function AdminLoginForm() {
       <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
         <div className="bg-white py-8 px-6 sm:px-10 shadow-card rounded-3xl border border-aquabark-border space-y-6">
           <div className="text-center space-y-1">
-            <h3 className="text-base font-bold text-slate-800">Owner Access Verification</h3>
+            <h3 className="text-base font-bold text-slate-800">Admin Sign In</h3>
             <p className="text-xs text-slate-500">
-              Enter the admin bootstrap secret or master passcode configured in your environment.
+              Welcome back, <span className="font-semibold text-aquabark-dark">Gundeti Siddarth</span>
             </p>
           </div>
 
@@ -86,7 +86,22 @@ function AdminLoginForm() {
           <form onSubmit={handleSubmit} className="space-y-4">
             <div>
               <label className="block text-xs font-bold text-aquabark-dark uppercase tracking-wider mb-1.5">
-                Admin Secret Token / Passcode
+                Administrator
+              </label>
+              <div className="relative">
+                <ShieldCheck className="w-5 h-5 text-aquabark-accent absolute left-3.5 top-3" />
+                <input
+                  type="text"
+                  disabled
+                  value="Gundeti Siddarth"
+                  className="w-full pl-11 pr-4 py-3 text-sm font-medium rounded-2xl border-2 border-slate-100 bg-slate-50 text-slate-700 cursor-not-allowed"
+                />
+              </div>
+            </div>
+
+            <div>
+              <label className="block text-xs font-bold text-aquabark-dark uppercase tracking-wider mb-1.5">
+                Password / Master Passcode
               </label>
               <div className="relative">
                 <KeyRound className="w-5 h-5 text-slate-400 absolute left-3.5 top-3" />
@@ -95,7 +110,7 @@ function AdminLoginForm() {
                   required
                   value={tokenInput}
                   onChange={(e) => setTokenInput(e.target.value)}
-                  placeholder="Enter Admin Security Passcode or Token"
+                  placeholder="Enter password (e.g. aquabarktelugu)"
                   className="w-full pl-11 pr-4 py-3 text-sm font-mono rounded-2xl border-2 border-slate-200 focus:border-aquabark-dark focus:outline-hidden transition-colors"
                 />
               </div>
@@ -110,7 +125,7 @@ function AdminLoginForm() {
                 <span>Verifying Access...</span>
               ) : (
                 <>
-                  <span>Sign In to Mobile Admin</span>
+                  <span>Sign In as Admin</span>
                   <ArrowRight className="w-4 h-4" />
                 </>
               )}
