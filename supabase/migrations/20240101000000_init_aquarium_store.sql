@@ -422,3 +422,194 @@ CREATE INDEX IF NOT EXISTS "idx_orders_status" ON "orders"("status");
 CREATE INDEX IF NOT EXISTS "idx_orders_order_number" ON "orders"("order_number");
 CREATE INDEX IF NOT EXISTS "idx_shipments_tracking" ON "shipments"("tracking_number");
 CREATE INDEX IF NOT EXISTS "idx_promotions_code" ON "promotions"("code");
+
+
+-- ========================================================
+-- 27. ROW LEVEL SECURITY (RLS) POLICIES
+-- ========================================================
+
+-- Enable RLS on all tables
+ALTER TABLE "profiles" ENABLE ROW LEVEL SECURITY;
+ALTER TABLE "customer_addresses" ENABLE ROW LEVEL SECURITY;
+ALTER TABLE "categories" ENABLE ROW LEVEL SECURITY;
+ALTER TABLE "products" ENABLE ROW LEVEL SECURITY;
+ALTER TABLE "product_images" ENABLE ROW LEVEL SECURITY;
+ALTER TABLE "product_variants" ENABLE ROW LEVEL SECURITY;
+ALTER TABLE "inventory" ENABLE ROW LEVEL SECURITY;
+ALTER TABLE "inventory_movements" ENABLE ROW LEVEL SECURITY;
+ALTER TABLE "price_history" ENABLE ROW LEVEL SECURITY;
+ALTER TABLE "combos" ENABLE ROW LEVEL SECURITY;
+ALTER TABLE "combo_items" ENABLE ROW LEVEL SECURITY;
+ALTER TABLE "promotions" ENABLE ROW LEVEL SECURITY;
+ALTER TABLE "carts" ENABLE ROW LEVEL SECURITY;
+ALTER TABLE "cart_items" ENABLE ROW LEVEL SECURITY;
+ALTER TABLE "orders" ENABLE ROW LEVEL SECURITY;
+ALTER TABLE "order_items" ENABLE ROW LEVEL SECURITY;
+ALTER TABLE "payments" ENABLE ROW LEVEL SECURITY;
+ALTER TABLE "payment_events" ENABLE ROW LEVEL SECURITY;
+ALTER TABLE "cancellation_requests" ENABLE ROW LEVEL SECURITY;
+ALTER TABLE "shipments" ENABLE ROW LEVEL SECURITY;
+ALTER TABLE "order_status_history" ENABLE ROW LEVEL SECURITY;
+ALTER TABLE "coupon_redemptions" ENABLE ROW LEVEL SECURITY;
+ALTER TABLE "product_reviews" ENABLE ROW LEVEL SECURITY;
+ALTER TABLE "notifications" ENABLE ROW LEVEL SECURITY;
+ALTER TABLE "admin_settings" ENABLE ROW LEVEL SECURITY;
+
+-- Helper Function: Check if current request is from an admin
+CREATE OR REPLACE FUNCTION public.is_admin()
+RETURNS BOOLEAN AS $$
+BEGIN
+  RETURN EXISTS (
+    SELECT 1 FROM public.profiles
+    WHERE supabase_auth_id = auth.uid()::text AND role = 'ADMIN'
+  );
+END;
+$$ LANGUAGE plpgsql SECURITY DEFINER;
+
+-- 1. CATALOG POLICIES (Public read active items, Admin write)
+CREATE POLICY "Public can view active categories" ON "categories"
+  FOR SELECT USING (is_active = true OR public.is_admin());
+
+CREATE POLICY "Admin manage categories" ON "categories"
+  FOR ALL USING (public.is_admin());
+
+CREATE POLICY "Public can view active products" ON "products"
+  FOR SELECT USING (is_active = true OR public.is_admin());
+
+CREATE POLICY "Admin manage products" ON "products"
+  FOR ALL USING (public.is_admin());
+
+CREATE POLICY "Public can view product images" ON "product_images"
+  FOR SELECT USING (true);
+
+CREATE POLICY "Admin manage product images" ON "product_images"
+  FOR ALL USING (public.is_admin());
+
+CREATE POLICY "Public can view active variants" ON "product_variants"
+  FOR SELECT USING (is_active = true OR public.is_admin());
+
+CREATE POLICY "Admin manage product variants" ON "product_variants"
+  FOR ALL USING (public.is_admin());
+
+CREATE POLICY "Public can view inventory availability" ON "inventory"
+  FOR SELECT USING (true);
+
+CREATE POLICY "Admin manage inventory" ON "inventory"
+  FOR ALL USING (public.is_admin());
+
+CREATE POLICY "Admin view inventory movements" ON "inventory_movements"
+  FOR ALL USING (public.is_admin());
+
+CREATE POLICY "Admin view price history" ON "price_history"
+  FOR ALL USING (public.is_admin());
+
+CREATE POLICY "Public can view active combos" ON "combos"
+  FOR SELECT USING (is_active = true OR public.is_admin());
+
+CREATE POLICY "Admin manage combos" ON "combos"
+  FOR ALL USING (public.is_admin());
+
+CREATE POLICY "Public can view combo items" ON "combo_items"
+  FOR SELECT USING (true);
+
+CREATE POLICY "Admin manage combo items" ON "combo_items"
+  FOR ALL USING (public.is_admin());
+
+CREATE POLICY "Public can view active promotions" ON "promotions"
+  FOR SELECT USING (is_active = true OR public.is_admin());
+
+CREATE POLICY "Admin manage promotions" ON "promotions"
+  FOR ALL USING (public.is_admin());
+
+-- 2. USER PROFILE & ADDRESS POLICIES
+CREATE POLICY "Users can view and edit own profile" ON "profiles"
+  FOR ALL USING (supabase_auth_id = auth.uid()::text OR public.is_admin());
+
+CREATE POLICY "Users can manage own addresses" ON "customer_addresses"
+  FOR ALL USING (
+    profile_id IN (SELECT id FROM public.profiles WHERE supabase_auth_id = auth.uid()::text)
+    OR public.is_admin()
+  );
+
+-- 3. CART POLICIES (Scoped by session or profile)
+CREATE POLICY "Cart session access" ON "carts"
+  FOR ALL USING (true);
+
+CREATE POLICY "Cart items access" ON "cart_items"
+  FOR ALL USING (true);
+
+-- 4. ORDERS & SHIPMENTS POLICIES
+CREATE POLICY "Customers can view their orders" ON "orders"
+  FOR SELECT USING (
+    customer_phone = current_setting('request.jwt.claim.phone', true)
+    OR profile_id IN (SELECT id FROM public.profiles WHERE supabase_auth_id = auth.uid()::text)
+    OR public.is_admin()
+  );
+
+CREATE POLICY "Anyone can create order" ON "orders"
+  FOR INSERT WITH CHECK (true);
+
+CREATE POLICY "Admin manage orders" ON "orders"
+  FOR UPDATE USING (public.is_admin());
+
+CREATE POLICY "Order items viewable by order owner" ON "order_items"
+  FOR SELECT USING (
+    order_id IN (
+      SELECT id FROM public.orders WHERE
+        customer_phone = current_setting('request.jwt.claim.phone', true)
+        OR profile_id IN (SELECT id FROM public.profiles WHERE supabase_auth_id = auth.uid()::text)
+        OR public.is_admin()
+    )
+  );
+
+CREATE POLICY "Anyone can insert order items on checkout" ON "order_items"
+  FOR INSERT WITH CHECK (true);
+
+CREATE POLICY "Public tracking lookup" ON "shipments"
+  FOR SELECT USING (true);
+
+CREATE POLICY "Admin manage shipments" ON "shipments"
+  FOR ALL USING (public.is_admin());
+
+-- 5. CANCELLATION REQUESTS
+CREATE POLICY "Customers can create and view cancellation requests" ON "cancellation_requests"
+  FOR SELECT USING (
+    order_id IN (
+      SELECT id FROM public.orders WHERE
+        customer_phone = current_setting('request.jwt.claim.phone', true)
+        OR profile_id IN (SELECT id FROM public.profiles WHERE supabase_auth_id = auth.uid()::text)
+        OR public.is_admin()
+    )
+  );
+
+CREATE POLICY "Customers can insert cancellation request" ON "cancellation_requests"
+  FOR INSERT WITH CHECK (true);
+
+CREATE POLICY "Admin resolve cancellation request" ON "cancellation_requests"
+  FOR UPDATE USING (public.is_admin());
+
+-- 6. REVIEWS
+CREATE POLICY "Public can view approved reviews" ON "product_reviews"
+  FOR SELECT USING (is_approved = true OR public.is_admin());
+
+CREATE POLICY "Customers can submit review" ON "product_reviews"
+  FOR INSERT WITH CHECK (true);
+
+CREATE POLICY "Admin moderate reviews" ON "product_reviews"
+  FOR ALL USING (public.is_admin());
+
+-- 7. AUDIT & INTERNAL TABLES (Admin & Service Role ONLY)
+CREATE POLICY "Internal payments restricted" ON "payments"
+  FOR ALL USING (public.is_admin());
+
+CREATE POLICY "Internal payment events restricted" ON "payment_events"
+  FOR ALL USING (public.is_admin());
+
+CREATE POLICY "Admin view order history" ON "order_status_history"
+  FOR ALL USING (public.is_admin());
+
+CREATE POLICY "Admin settings access" ON "admin_settings"
+  FOR SELECT USING (true);
+
+CREATE POLICY "Admin settings update" ON "admin_settings"
+  FOR ALL USING (public.is_admin());

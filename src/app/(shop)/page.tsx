@@ -234,8 +234,8 @@ export default function HomePage() {
                 <p className="text-xs text-white/70 mt-1">Sealed with pure medical oxygen lasting 60+ continuous hours.</p>
               </div>
               <div className="bg-white/5 border border-white/10 p-4 rounded-2xl">
-                <h4 className="font-serif font-bold text-aquabark-primary text-base">DOA Guarantee</h4>
-                <p className="text-xs text-white/70 mt-1">Immediate replacement or full refund on rare transit casualties.</p>
+                <h4 className="font-serif font-bold text-aquabark-primary text-base">DOA Support Policy</h4>
+                <p className="text-xs text-white/70 mt-1">Prompt replacement or refund on rare transit casualties.</p>
               </div>
             </div>
 

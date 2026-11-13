@@ -321,4 +321,39 @@ describe("AquaBark Telugu - Backend Server Actions & Store Tests", () => {
       expect(validSignature).not.toBe(invalidSignature);
     });
   });
+
+  describe("8. Razorpay Refund Server Action", () => {
+    it("should process refund and update order status to REFUNDED", async () => {
+      const { processRefundAction } = await import("@/actions/orders");
+      
+      // Order 1 from seed data is PAID
+      const targetOrder = await store.getOrderByNumber("ABT-2026-104921");
+      expect(targetOrder).toBeDefined();
+
+      const refundRes = await processRefundAction(
+        targetOrder!.id,
+        targetOrder!.totalAmount,
+        "Customer request",
+        process.env.ADMIN_BOOTSTRAP_SECRET || "aquabark-telugu-secure-setup-2026"
+      );
+
+      expect(refundRes.success).toBe(true);
+      expect(refundRes.paymentStatus).toBe("REFUNDED");
+      expect(refundRes.refundId).toBeDefined();
+
+      // Verify order paymentStatus in store is now REFUNDED
+      const updatedOrder = await store.getOrderById(targetOrder!.id);
+      expect(updatedOrder?.paymentStatus).toBe("REFUNDED");
+
+      // Attempt second refund -> Should be rejected
+      const secondRefund = await processRefundAction(
+        targetOrder!.id,
+        targetOrder!.totalAmount,
+        "Duplicate attempt",
+        process.env.ADMIN_BOOTSTRAP_SECRET || "aquabark-telugu-secure-setup-2026"
+      );
+      expect(secondRefund.success).toBe(false);
+      expect(secondRefund.error).toMatch(/already been refunded/i);
+    });
+  });
 });

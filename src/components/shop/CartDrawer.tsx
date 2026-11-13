@@ -3,6 +3,7 @@
 import React, { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
+import { usePathname } from "next/navigation";
 import { 
   X, 
   Trash2, 
@@ -19,6 +20,12 @@ import { useCart } from "@/context/CartContext";
 import { formatINR } from "@/lib/utils";
 
 export function CartDrawer() {
+  const pathname = usePathname();
+
+  // Complete Isolation: Strictly NEVER render customer cart drawer on admin routes
+  if (pathname && pathname.startsWith("/admin")) {
+    return null;
+  }
   const {
     items,
     isCartOpen,

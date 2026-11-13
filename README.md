@@ -118,3 +118,4 @@ Test coverage includes 76 tests across 8 suites:
 - [x] Single-time stock restoration on cancellation approval
 - [x] Mobile-friendly bottom navigation and touch targets (≥48px) for phone operation
 - [x] PWA manifest and service worker caching configured
+

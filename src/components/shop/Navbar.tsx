@@ -5,55 +5,44 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { 
   ShoppingBag, 
-  Heart, 
   User, 
   Menu, 
   X, 
   Search, 
-  Compass, 
-  ShieldCheck, 
   Fish, 
   Leaf, 
   Layers,
-  Truck
+  Wrench,
+  Home
 } from "lucide-react";
 import { useCart } from "@/context/CartContext";
 
 export function Navbar() {
   const pathname = usePathname();
-  const { itemCount, wishlist, setIsCartOpen } = useCart();
+  const { itemCount, setIsCartOpen } = useCart();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
   const [isSearchOpen, setIsSearchOpen] = useState(false);
 
+  // If on admin route, do not render storefront navbar
+  if (pathname && pathname.startsWith("/admin")) {
+    return null;
+  }
+
+  // Simplified navigation links strictly according to specification:
+  // Logo, Home, Fish, Aqua Plants, Accessories, Combos, Search, Account, Cart
   const navLinks = [
-    { name: "Live Fish", href: "/category/live-fish", icon: Fish },
+    { name: "Home", href: "/", icon: Home },
+    { name: "Fish", href: "/category/live-fish", icon: Fish },
     { name: "Aqua Plants", href: "/category/aqua-plants", icon: Leaf },
+    { name: "Accessories", href: "/category/accessories", icon: Wrench },
     { name: "Combos", href: "/category/combos", icon: Layers },
-    { name: "All Shop", href: "/shop", icon: Compass },
-    { name: "Track Order", href: "/track", icon: Truck },
-    { name: "Live Guarantee", href: "/policies/guarantee", icon: ShieldCheck },
   ];
 
   return (
     <>
-      {/* Top Announcement Bar */}
-      <div className="bg-aquabark-dark text-white text-xs py-2 px-4">
-        <div className="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-1 text-center font-medium">
-          <div className="flex items-center gap-2">
-            <span className="inline-block w-2 h-2 rounded-full bg-aquabark-accent animate-pulse" />
-            <span>🚚 Express Bus & Rail Parcel Dispatch Across AP, Telangana & Pan-India</span>
-          </div>
-          <div className="flex items-center gap-4 text-emerald-200">
-            <span>100% Live Arrival Guaranteed</span>
-            <span className="hidden md:inline">•</span>
-            <span className="hidden md:inline">Free Shipping on Orders Over ₹1,499</span>
-          </div>
-        </div>
-      </div>
-
-      {/* Main Sticky Navbar */}
-      <header className="sticky top-0 z-40 bg-aquabark-bg/95 backdrop-blur-md border-b border-aquabark-border transition-all">
+      {/* Main Sticky Navbar - Minimalist & Spacious */}
+      <header className="sticky top-0 z-40 bg-aquabark-bg/95 backdrop-blur-md border-b border-aquabark-border/80 transition-all">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between gap-4">
           
           {/* Mobile menu trigger */}
@@ -65,10 +54,10 @@ export function Navbar() {
             <Menu className="w-6 h-6" />
           </button>
 
-          {/* Logo & Brand */}
+          {/* Logo */}
           <Link href="/" className="flex items-center gap-3 group">
-            <div className="w-11 h-11 rounded-2xl bg-aquabark-dark flex items-center justify-center text-aquabark-primary shadow-soft group-hover:scale-105 transition-transform">
-              <Fish className="w-6 h-6 stroke-[2.2]" />
+            <div className="w-10 h-10 rounded-2xl bg-aquabark-dark flex items-center justify-center text-aquabark-primary shadow-soft group-hover:scale-105 transition-transform">
+              <Fish className="w-5 h-5 stroke-[2.2]" />
             </div>
             <div className="flex flex-col">
               <span className="font-serif text-2xl font-bold tracking-tight text-aquabark-dark leading-none">
@@ -80,30 +69,29 @@ export function Navbar() {
             </div>
           </Link>
 
-          {/* Desktop Navigation Links */}
-          <nav className="hidden lg:flex items-center gap-1 xl:gap-2">
+          {/* Simplified Desktop Navigation Links */}
+          <nav className="hidden lg:flex items-center gap-2 xl:gap-3">
             {navLinks.map((link) => {
               const isActive = pathname === link.href;
               return (
                 <Link
                   key={link.name}
                   href={link.href}
-                  className={`px-3.5 py-2 rounded-full text-sm font-medium transition-all flex items-center gap-1.5 ${
+                  className={`px-4 py-2 rounded-full text-sm font-medium transition-all ${
                     isActive
                       ? "bg-aquabark-dark text-white shadow-soft"
                       : "text-aquabark-text hover:bg-aquabark-secondary/60 hover:text-aquabark-dark"
                   }`}
                 >
-                  <link.icon className="w-4 h-4 opacity-80" />
-                  <span>{link.name}</span>
+                  {link.name}
                 </Link>
               );
             })}
           </nav>
 
-          {/* Right Action Icons */}
-          <div className="flex items-center gap-1 sm:gap-2">
-            {/* Search Button */}
+          {/* Right Action Icons: Search, Account, Cart */}
+          <div className="flex items-center gap-1.5 sm:gap-2">
+            {/* Search Trigger */}
             <button
               onClick={() => setIsSearchOpen(!isSearchOpen)}
               className="p-2.5 rounded-full text-aquabark-dark hover:bg-aquabark-secondary/50 transition-colors"
@@ -112,30 +100,16 @@ export function Navbar() {
               <Search className="w-5 h-5" />
             </button>
 
-            {/* Wishlist */}
-            <Link
-              href="/shop?filter=wishlist"
-              className="p-2.5 rounded-full text-aquabark-dark hover:bg-aquabark-secondary/50 transition-colors relative"
-              aria-label="Wishlist"
-            >
-              <Heart className="w-5 h-5" />
-              {wishlist.length > 0 && (
-                <span className="absolute top-1 right-1 w-4 h-4 rounded-full bg-aquabark-terracotta text-white text-[10px] font-bold flex items-center justify-center shadow-sm">
-                  {wishlist.length}
-                </span>
-              )}
-            </Link>
-
             {/* Customer Account */}
             <Link
               href="/account"
-              className="p-2.5 rounded-full text-aquabark-dark hover:bg-aquabark-secondary/50 transition-colors hidden sm:flex"
+              className="p-2.5 rounded-full text-aquabark-dark hover:bg-aquabark-secondary/50 transition-colors"
               aria-label="My Account"
             >
               <User className="w-5 h-5" />
             </Link>
 
-            {/* Cart Trigger Button */}
+            {/* Cart Button */}
             <button
               onClick={() => setIsCartOpen(true)}
               className="flex items-center gap-2 bg-aquabark-dark hover:bg-aquabark-darker text-white px-4 py-2.5 rounded-full transition-transform active:scale-95 shadow-soft ml-1"
@@ -149,14 +123,14 @@ export function Navbar() {
                   </span>
                 )}
               </div>
-              <span className="text-xs font-semibold tracking-wide hidden md:inline">CART</span>
+              <span className="text-xs font-semibold tracking-wide hidden sm:inline">CART</span>
             </button>
           </div>
         </div>
 
-        {/* Expandable Search Bar */}
+        {/* Expandable Minimal Search Bar */}
         {isSearchOpen && (
-          <div className="border-t border-aquabark-border bg-white px-4 py-3 shadow-inner">
+          <div className="border-t border-aquabark-border bg-white px-4 py-3 shadow-inner animate-fade-in">
             <div className="max-w-3xl mx-auto flex items-center gap-2">
               <Search className="w-5 h-5 text-aquabark-muted" />
               <input
@@ -168,7 +142,7 @@ export function Navbar() {
                     window.location.href = `/shop?search=${encodeURIComponent(searchQuery)}`;
                   }
                 }}
-                placeholder="Search Guppies, Rosetail Bettas, Anubias on Lava Rock, Combos..."
+                placeholder="Search Guppies, Bettas, Anubias on Lava Rock, Combos..."
                 className="w-full bg-transparent border-none text-aquabark-text placeholder-aquabark-muted focus:outline-none text-sm py-1"
                 autoFocus
               />
@@ -204,8 +178,8 @@ export function Navbar() {
             <div>
               <div className="flex items-center justify-between pb-6 border-b border-aquabark-border">
                 <div className="flex items-center gap-2">
-                  <div className="w-9 h-9 rounded-xl bg-aquabark-dark flex items-center justify-center text-aquabark-primary">
-                    <Fish className="w-5 h-5" />
+                  <div className="w-8 h-8 rounded-xl bg-aquabark-dark flex items-center justify-center text-aquabark-primary">
+                    <Fish className="w-4 h-4" />
                   </div>
                   <span className="font-serif font-bold text-lg text-aquabark-dark">
                     AquaBark Telugu
@@ -215,11 +189,11 @@ export function Navbar() {
                   onClick={() => setMobileMenuOpen(false)}
                   className="p-2 rounded-lg text-aquabark-text hover:bg-aquabark-secondary"
                 >
-                  <X className="w-6 h-6" />
+                  <X className="w-5 h-5" />
                 </button>
               </div>
 
-              {/* Navigation items */}
+              {/* Simplified Mobile Nav Links */}
               <div className="py-6 space-y-2">
                 {navLinks.map((link) => (
                   <Link
@@ -248,11 +222,11 @@ export function Navbar() {
               </div>
             </div>
 
-            {/* Bottom info */}
-            <div className="pt-6 border-t border-aquabark-border text-xs text-aquabark-muted space-y-2">
-              <p className="font-semibold text-aquabark-dark">Transit Guarantee Helpline:</p>
+            {/* Bottom contact info */}
+            <div className="pt-6 border-t border-aquabark-border text-xs text-aquabark-muted space-y-1">
+              <p className="font-semibold text-aquabark-dark">Breeding Farm Hubs:</p>
+              <p>Rajahmundry & Vijayawada</p>
               <p>WhatsApp: +91 94900 12345</p>
-              <p>Rajahmundry & Vijayawada Hubs</p>
             </div>
           </div>
         </div>
@@ -260,4 +234,3 @@ export function Navbar() {
     </>
   );
 }
-

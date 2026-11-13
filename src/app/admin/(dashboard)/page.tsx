@@ -1,4 +1,4 @@
-import { getAdminDashboardStats, getAdminProducts, getAdminCategories } from "@/actions/admin";
+import { getAdminDashboardStats, getAdminProducts } from "@/actions/admin";
 import { AdminDashboardView } from "@/components/admin/AdminDashboardView";
 
 export const dynamic = "force-dynamic";
@@ -6,13 +6,15 @@ export const dynamic = "force-dynamic";
 export default async function AdminDashboardPage() {
   const stats = await getAdminDashboardStats();
   const products = await getAdminProducts();
-  const categories = await getAdminCategories();
 
   return (
     <AdminDashboardView
-      initialStats={stats}
-      allProducts={products}
-      allCategories={categories}
+      stats={{
+        newOrdersCount: stats.pendingOrdersCount,
+        totalProductsCount: products.length,
+        salesTotal: stats.totalSales,
+        recentOrders: stats.recentOrders,
+      }}
     />
   );
 }

@@ -95,7 +95,7 @@ function AdminLoginForm() {
                   required
                   value={tokenInput}
                   onChange={(e) => setTokenInput(e.target.value)}
-                  placeholder="aquabark-telugu-secure-setup-2026"
+                  placeholder="Enter Admin Security Passcode or Token"
                   className="w-full pl-11 pr-4 py-3 text-sm font-mono rounded-2xl border-2 border-slate-200 focus:border-aquabark-dark focus:outline-hidden transition-colors"
                 />
               </div>
@@ -117,20 +117,22 @@ function AdminLoginForm() {
             </button>
           </form>
 
-          {/* Quick Demo Pre-fill for instant development & testing */}
-          <div className="pt-4 border-t border-slate-100">
-            <button
-              type="button"
-              onClick={handleQuickDemoFill}
-              className="w-full py-2.5 px-3 bg-slate-50 hover:bg-slate-100 text-slate-600 rounded-xl text-xs font-semibold border border-slate-200 flex items-center justify-center gap-1.5 transition-colors"
-            >
-              <Sparkles className="w-3.5 h-3.5 text-amber-500" />
-              <span>Fill Default Bootstrap Token</span>
-            </button>
-            <p className="text-[11px] text-center text-slate-400 mt-2">
-              Protected by server-side cookie verification & RBAC token checks.
-            </p>
-          </div>
+          {/* Quick Demo Pre-fill for instant development & testing (if configured) */}
+          {DEFAULT_ADMIN_SECRET ? (
+            <div className="pt-4 border-t border-slate-100">
+              <button
+                type="button"
+                onClick={handleQuickDemoFill}
+                className="w-full py-2.5 px-3 bg-slate-50 hover:bg-slate-100 text-slate-600 rounded-xl text-xs font-semibold border border-slate-200 flex items-center justify-center gap-1.5 transition-colors cursor-pointer"
+              >
+                <Sparkles className="w-3.5 h-3.5 text-amber-500" />
+                <span>Fill Configured Bootstrap Token</span>
+              </button>
+              <p className="text-[11px] text-center text-slate-400 mt-2">
+                Protected by server-side cookie verification & RBAC token checks.
+              </p>
+            </div>
+          ) : null}
         </div>
       </div>
     </div>

@@ -1,21 +1,33 @@
+import crypto from "crypto";
 import { cookies, headers } from "next/headers";
 import { ADMIN_COOKIE_NAME, DEFAULT_ADMIN_SECRET } from "./admin-constants";
 
 export { ADMIN_COOKIE_NAME, DEFAULT_ADMIN_SECRET };
 
 export function getExpectedAdminSecret(): string {
-  return process.env.ADMIN_BOOTSTRAP_SECRET || DEFAULT_ADMIN_SECRET;
+  return (process.env.ADMIN_BOOTSTRAP_SECRET || DEFAULT_ADMIN_SECRET || "").trim();
 }
 
 export function isValidAdminToken(token: string | null | undefined): boolean {
   if (!token) return false;
-  const expected = getExpectedAdminSecret().trim();
+  const expected = getExpectedAdminSecret();
+  if (!expected) return false;
+
   const candidate = token.trim();
-  return (
-    candidate === expected ||
-    candidate === "aquabark-admin-session-valid" ||
-    candidate === "aquabark-telugu-secure-setup-2026"
-  );
+  const bufExpected = Buffer.from(expected, "utf-8");
+  const bufCandidate = Buffer.from(candidate, "utf-8");
+
+  if (bufExpected.length === bufCandidate.length && crypto.timingSafeEqual(bufExpected, bufCandidate)) {
+    return true;
+  }
+
+  const sessionToken = "aquabark-admin-session-valid";
+  const bufSession = Buffer.from(sessionToken, "utf-8");
+  if (bufSession.length === bufCandidate.length && crypto.timingSafeEqual(bufSession, bufCandidate)) {
+    return true;
+  }
+
+  return false;
 }
 
 let _testAdminToken: string | null | undefined = undefined;

@@ -117,16 +117,16 @@ export function ProductDetailClient({
     },
     {
       id: "delivery-guarantee",
-      title: "DELIVERY & 100% LIVE GUARANTEE",
+      title: "SHIPPING & TRANSIT INFORMATION",
       content: (
         <div className="space-y-3">
           <p>
-            We take complete responsibility for the transit safety of your live fish. In the rare event of transit DOA (Dead on Arrival):
+            Livestock is conditioned and packed with pure oxygen for regional transit across South India. In case of transit issues:
           </p>
           <ul className="list-disc pl-5 space-y-1 text-xs">
             <li>Record a clear 30-second unboxing video of the unopened oxygen bag.</li>
             <li>Send the video to our WhatsApp (+91 94900 12345) within 2 hours of pickup/delivery.</li>
-            <li>We issue an immediate free replacement dispatch or 100% refund without questions.</li>
+            <li>We offer quick replacement dispatch or refund for damaged items.</li>
             <li>Shipped via TSRTC/APSRTC Bus Parcel or South Central Railway Express for fast pickup.</li>
           </ul>
         </div>
@@ -229,8 +229,8 @@ export function ProductDetailClient({
               <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 pt-4">
                 <div className="flex flex-col items-center text-center p-3 rounded-2xl bg-aquabark-secondary/30 border border-aquabark-border/60">
                   <ShieldCheck className="w-5 h-5 text-aquabark-dark mb-1" />
-                  <span className="text-[11px] font-bold text-aquabark-dark">Live Arrival</span>
-                  <span className="text-[9px] text-aquabark-muted">Guaranteed</span>
+                  <span className="text-[11px] font-bold text-aquabark-dark">Pure O₂</span>
+                  <span className="text-[9px] text-aquabark-muted">Oxygen Sealed</span>
                 </div>
                 <div className="flex flex-col items-center text-center p-3 rounded-2xl bg-aquabark-secondary/30 border border-aquabark-border/60">
                   <Truck className="w-5 h-5 text-aquabark-dark mb-1" />

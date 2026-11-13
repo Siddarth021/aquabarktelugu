@@ -29,6 +29,15 @@
       "parentId": null,
       "sortOrder": 3,
       "isActive": true
+    },
+    {
+      "id": "cat-1794578510225",
+      "name": "Test Driftwood Collection",
+      "slug": "test-driftwood-collection",
+      "description": "Hardscape woods",
+      "imageUrl": null,
+      "sortOrder": 4,
+      "isActive": true
     }
   ],
   "products": [
@@ -72,11 +81,11 @@
           "gender": "Male",
           "size": "Adult (1.5 inch)",
           "plantPotType": null,
-          "price": 180,
+          "price": 399,
           "originalPrice": 220,
           "isActive": true,
           "sortOrder": 1,
-          "stock": 35,
+          "stock": 43,
           "reservedStock": 0
         },
         {
@@ -166,7 +175,7 @@
           "isActive": true,
           "sortOrder": 1,
           "stock": 12,
-          "reservedStock": 0
+          "reservedStock": 4
         },
         {
           "id": "var-deb-female",
@@ -225,7 +234,7 @@
           "isActive": true,
           "sortOrder": 1,
           "stock": 35,
-          "reservedStock": 0
+          "reservedStock": 6
         },
         {
           "id": "var-tetra-10",
@@ -416,7 +425,7 @@
           "originalPrice": 220,
           "isActive": true,
           "sortOrder": 1,
-          "stock": 35,
+          "stock": 33,
           "reservedStock": 0
         },
         {
@@ -490,7 +499,7 @@
           "originalPrice": 450,
           "isActive": true,
           "sortOrder": 2,
-          "stock": 18,
+          "stock": 15,
           "reservedStock": 0
         }
       ],
@@ -770,7 +779,7 @@
           "originalPrice": 1050,
           "isActive": true,
           "sortOrder": 2,
-          "stock": 25,
+          "stock": 24,
           "reservedStock": 0
         }
       ],
@@ -927,6 +936,564 @@
   "carts": {},
   "orders": [
     {
+      "id": "ord-1794578722656",
+      "orderNumber": "ABT-2026-866936",
+      "status": "PENDING",
+      "customerName": "Price Tamper Attacker",
+      "customerPhone": "+919848077711",
+      "customerEmail": null,
+      "shippingAddress": {
+        "recipientName": "Attacker",
+        "phone": "+919848077711",
+        "street": "Cyber Road",
+        "city": "Hyderabad",
+        "state": "Telangana",
+        "postalCode": "500001"
+      },
+      "transitMethod": "BUS_PARCEL",
+      "subtotal": 450,
+      "discountAmount": 0,
+      "shippingFee": 100,
+      "totalAmount": 550,
+      "paymentStatus": "PENDING",
+      "razorpayOrderId": null,
+      "adminNotes": null,
+      "items": [
+        {
+          "id": "oi-1794578722656-466",
+          "productId": "prod-fish-002",
+          "variantId": "var-deb-male",
+          "productName": "Dumbo Ear Halfmoon Betta",
+          "variantTitle": "Male Show Grade",
+          "priceSnapshot": 450,
+          "quantity": 1,
+          "totalSnapshot": 450
+        }
+      ],
+      "shipment": null,
+      "cancellationRequested": false,
+      "createdAt": "2026-11-13T14:05:22.656Z"
+    },
+    {
+      "id": "ord-1794578688386",
+      "orderNumber": "ABT-2026-108693",
+      "status": "PENDING",
+      "customerName": "Price Tamper Attacker",
+      "customerPhone": "+919848077711",
+      "customerEmail": null,
+      "shippingAddress": {
+        "recipientName": "Attacker",
+        "phone": "+919848077711",
+        "street": "Cyber Road",
+        "city": "Hyderabad",
+        "state": "Telangana",
+        "postalCode": "500001"
+      },
+      "transitMethod": "BUS_PARCEL",
+      "subtotal": 450,
+      "discountAmount": 0,
+      "shippingFee": 100,
+      "totalAmount": 550,
+      "paymentStatus": "PENDING",
+      "razorpayOrderId": null,
+      "adminNotes": null,
+      "items": [
+        {
+          "id": "oi-1794578688386-367",
+          "productId": "prod-fish-002",
+          "variantId": "var-deb-male",
+          "productName": "Dumbo Ear Halfmoon Betta",
+          "variantTitle": "Male Show Grade",
+          "priceSnapshot": 450,
+          "quantity": 1,
+          "totalSnapshot": 450
+        }
+      ],
+      "shipment": null,
+      "cancellationRequested": false,
+      "createdAt": "2026-11-13T14:04:48.386Z"
+    },
+    {
+      "id": "ord-1794578570253",
+      "orderNumber": "ABT-2026-673700",
+      "status": "PENDING",
+      "customerName": "Reservation Customer",
+      "customerPhone": "+919848033344",
+      "customerEmail": null,
+      "shippingAddress": {
+        "recipientName": "Reservation Recipient",
+        "phone": "+919848033344",
+        "street": "Tilak Road",
+        "city": "Hyderabad",
+        "state": "Telangana",
+        "postalCode": "500001"
+      },
+      "transitMethod": "BUS_PARCEL",
+      "subtotal": 750,
+      "discountAmount": 0,
+      "shippingFee": 100,
+      "totalAmount": 850,
+      "paymentStatus": "PENDING",
+      "razorpayOrderId": null,
+      "adminNotes": null,
+      "items": [
+        {
+          "id": "oi-1794578570253-23",
+          "productId": "prod-fish-003",
+          "variantId": "var-tetra-5",
+          "productName": "Cardinal Neon Tetra",
+          "variantTitle": "School of 5 Fish",
+          "priceSnapshot": 250,
+          "quantity": 3,
+          "totalSnapshot": 750
+        }
+      ],
+      "shipment": null,
+      "cancellationRequested": false,
+      "createdAt": "2026-11-13T14:02:50.253Z"
+    },
+    {
+      "id": "ord-1794578561197",
+      "orderNumber": "ABT-2026-748783",
+      "status": "CANCELLED",
+      "customerName": "Concurrent Cancel Customer",
+      "customerPhone": "+919848099112",
+      "customerEmail": null,
+      "shippingAddress": {
+        "recipientName": "Cancel Customer",
+        "phone": "+919848099112",
+        "street": "Station Road",
+        "city": "Nellore",
+        "state": "Andhra Pradesh",
+        "postalCode": "524001"
+      },
+      "transitMethod": "BUS_PARCEL",
+      "subtotal": 290,
+      "discountAmount": 0,
+      "shippingFee": 100,
+      "totalAmount": 390,
+      "paymentStatus": "PENDING",
+      "razorpayOrderId": null,
+      "adminNotes": "Confirmed",
+      "items": [
+        {
+          "id": "oi-1794578561197-100",
+          "productId": "prod-plant-001",
+          "variantId": "var-jf-wood",
+          "productName": "Java Fern (Microsorum Pteropus)",
+          "variantTitle": "Mounted on Natural Driftwood (Ready-to-place)",
+          "priceSnapshot": 290,
+          "quantity": 1,
+          "totalSnapshot": 290
+        }
+      ],
+      "shipment": null,
+      "cancellationRequested": false,
+      "createdAt": "2026-11-13T14:02:41.197Z"
+    },
+    {
+      "id": "ord-1794578561187",
+      "orderNumber": "ABT-2026-309551",
+      "status": "CANCELLED",
+      "customerName": "Cancellation Test Customer",
+      "customerPhone": "+919848077788",
+      "customerEmail": null,
+      "shippingAddress": {
+        "recipientName": "Cancel Customer",
+        "phone": "+919848077788",
+        "street": "Collectorate Road",
+        "city": "Kurnool",
+        "state": "Andhra Pradesh",
+        "postalCode": "518001"
+      },
+      "transitMethod": "BUS_PARCEL",
+      "subtotal": 680,
+      "discountAmount": 0,
+      "shippingFee": 100,
+      "totalAmount": 780,
+      "paymentStatus": "PENDING",
+      "razorpayOrderId": null,
+      "adminNotes": "Confirmed",
+      "items": [
+        {
+          "id": "oi-1794578561187-21",
+          "productId": "prod-acc-001",
+          "variantId": "var-spf-double",
+          "productName": "Ultra-Quiet Biochemical Sponge Filter",
+          "variantTitle": "Double Sponge with Ceramic Media Chambers (Up to 120L)",
+          "priceSnapshot": 340,
+          "quantity": 2,
+          "totalSnapshot": 680
+        }
+      ],
+      "shipment": null,
+      "cancellationRequested": false,
+      "createdAt": "2026-11-13T14:02:41.187Z"
+    },
+    {
+      "id": "ord-1794578561183",
+      "orderNumber": "ABT-2026-865897",
+      "status": "CONFIRMED",
+      "customerName": "Fulfillment Customer",
+      "customerPhone": "+919848055566",
+      "customerEmail": null,
+      "shippingAddress": {
+        "recipientName": "Fulfillment Customer",
+        "phone": "+919848055566",
+        "street": "Brodipet",
+        "city": "Guntur",
+        "state": "Andhra Pradesh",
+        "postalCode": "522002"
+      },
+      "transitMethod": "BUS_PARCEL",
+      "subtotal": 360,
+      "discountAmount": 0,
+      "shippingFee": 100,
+      "totalAmount": 460,
+      "paymentStatus": "PENDING",
+      "razorpayOrderId": null,
+      "adminNotes": "Confirmed",
+      "items": [
+        {
+          "id": "oi-1794578561183-3",
+          "productId": "prod-plant-002",
+          "variantId": "var-as-std",
+          "productName": "Amazon Sword (Echinodorus Bleheri)",
+          "variantTitle": "Standard Pot (6-8 Leaves, 15cm)",
+          "priceSnapshot": 180,
+          "quantity": 2,
+          "totalSnapshot": 360
+        }
+      ],
+      "shipment": null,
+      "cancellationRequested": false,
+      "createdAt": "2026-11-13T14:02:41.183Z"
+    },
+    {
+      "id": "ord-1794578561179",
+      "orderNumber": "ABT-2026-414786",
+      "status": "PENDING",
+      "customerName": "Concurrent Buyer 2",
+      "customerPhone": "+919848000002",
+      "customerEmail": null,
+      "shippingAddress": {
+        "recipientName": "Buyer 2",
+        "phone": "+919848000002",
+        "street": "MG Road",
+        "city": "Visakhapatnam",
+        "state": "Andhra Pradesh",
+        "postalCode": "530001"
+      },
+      "transitMethod": "BUS_PARCEL",
+      "subtotal": 380,
+      "discountAmount": 0,
+      "shippingFee": 100,
+      "totalAmount": 480,
+      "paymentStatus": "PENDING",
+      "razorpayOrderId": null,
+      "adminNotes": null,
+      "items": [
+        {
+          "id": "oi-1794578561179-194",
+          "productId": "prod-plant-003",
+          "variantId": "var-an-lava",
+          "productName": "Anubias Barteri var. Nana",
+          "variantTitle": "Mounted on Black Volcanic Lava Rock",
+          "priceSnapshot": 380,
+          "quantity": 1,
+          "totalSnapshot": 380
+        }
+      ],
+      "shipment": null,
+      "cancellationRequested": false,
+      "createdAt": "2026-11-13T14:02:41.179Z"
+    },
+    {
+      "id": "ord-1794578561178",
+      "orderNumber": "ABT-2026-617354",
+      "status": "PENDING",
+      "customerName": "Concurrent Buyer 1",
+      "customerPhone": "+919848000001",
+      "customerEmail": null,
+      "shippingAddress": {
+        "recipientName": "Buyer 1",
+        "phone": "+919848000001",
+        "street": "MG Road",
+        "city": "Visakhapatnam",
+        "state": "Andhra Pradesh",
+        "postalCode": "530001"
+      },
+      "transitMethod": "BUS_PARCEL",
+      "subtotal": 380,
+      "discountAmount": 0,
+      "shippingFee": 100,
+      "totalAmount": 480,
+      "paymentStatus": "PENDING",
+      "razorpayOrderId": null,
+      "adminNotes": null,
+      "items": [
+        {
+          "id": "oi-1794578561178-365",
+          "productId": "prod-plant-003",
+          "variantId": "var-an-lava",
+          "productName": "Anubias Barteri var. Nana",
+          "variantTitle": "Mounted on Black Volcanic Lava Rock",
+          "priceSnapshot": 380,
+          "quantity": 1,
+          "totalSnapshot": 380
+        }
+      ],
+      "shipment": null,
+      "cancellationRequested": false,
+      "createdAt": "2026-11-13T14:02:41.178Z"
+    },
+    {
+      "id": "ord-1794578561171",
+      "orderNumber": "ABT-2026-654213",
+      "status": "PENDING",
+      "customerName": "Reservation Customer",
+      "customerPhone": "+919848033344",
+      "customerEmail": null,
+      "shippingAddress": {
+        "recipientName": "Reservation Recipient",
+        "phone": "+919848033344",
+        "street": "Tilak Road",
+        "city": "Hyderabad",
+        "state": "Telangana",
+        "postalCode": "500001"
+      },
+      "transitMethod": "BUS_PARCEL",
+      "subtotal": 750,
+      "discountAmount": 0,
+      "shippingFee": 100,
+      "totalAmount": 850,
+      "paymentStatus": "PENDING",
+      "razorpayOrderId": null,
+      "adminNotes": null,
+      "items": [
+        {
+          "id": "oi-1794578561171-861",
+          "productId": "prod-fish-003",
+          "variantId": "var-tetra-5",
+          "productName": "Cardinal Neon Tetra",
+          "variantTitle": "School of 5 Fish",
+          "priceSnapshot": 250,
+          "quantity": 3,
+          "totalSnapshot": 750
+        }
+      ],
+      "shipment": null,
+      "cancellationRequested": false,
+      "createdAt": "2026-11-13T14:02:41.171Z"
+    },
+    {
+      "id": "ord-1794578510214",
+      "orderNumber": "ABT-2026-381831",
+      "status": "CANCELLED",
+      "customerName": "Ramesh Babu",
+      "customerPhone": "9848011111",
+      "customerEmail": null,
+      "shippingAddress": {
+        "recipientName": "Ramesh Babu",
+        "phone": "9848011111",
+        "street": "Main Road",
+        "city": "Vijayawada",
+        "state": "Andhra Pradesh",
+        "postalCode": "520001"
+      },
+      "transitMethod": "BUS_PARCEL",
+      "subtotal": 798,
+      "discountAmount": 0,
+      "shippingFee": 100,
+      "totalAmount": 898,
+      "paymentStatus": "PENDING",
+      "razorpayOrderId": null,
+      "adminNotes": null,
+      "items": [
+        {
+          "id": "oi-1794578510213-604",
+          "productId": "prod-fish-001",
+          "variantId": "var-rdg-male",
+          "productName": "Red Dragon Dumbo Guppy",
+          "variantTitle": "Male (Show Grade)",
+          "priceSnapshot": 399,
+          "quantity": 2,
+          "totalSnapshot": 798
+        }
+      ],
+      "shipment": null,
+      "cancellationRequested": false,
+      "createdAt": "2026-11-13T14:01:50.214Z"
+    },
+    {
+      "id": "ord-1794578510154",
+      "orderNumber": "ABT-2026-921232",
+      "status": "DELIVERED",
+      "customerName": "Test Customer Dispatch",
+      "customerPhone": "9848099992",
+      "customerEmail": null,
+      "shippingAddress": {
+        "recipientName": "Test Customer",
+        "phone": "9848099992",
+        "street": "Station Road",
+        "city": "Vijayawada",
+        "state": "Andhra Pradesh",
+        "postalCode": "520001"
+      },
+      "transitMethod": "BUS_PARCEL",
+      "subtotal": 180,
+      "discountAmount": 0,
+      "shippingFee": 100,
+      "totalAmount": 280,
+      "paymentStatus": "PENDING",
+      "razorpayOrderId": null,
+      "adminNotes": "Collected at PNBS",
+      "items": [
+        {
+          "id": "oi-1794578510154-751",
+          "productId": "prod-fish-001",
+          "variantId": "var-rdg-male",
+          "productName": "Red Dragon Dumbo Guppy",
+          "variantTitle": "Male (Show Grade)",
+          "priceSnapshot": 180,
+          "quantity": 1,
+          "totalSnapshot": 180
+        }
+      ],
+      "shipment": {
+        "id": "ship-1794578510162",
+        "orderId": "ord-1794578510154",
+        "trackingNumber": "ABT-TRK-211331",
+        "transportMethod": "BUS_PARCEL",
+        "operatorName": "TSRTC Parcel Express",
+        "departureLocation": "MGBS Hyderabad (Bay 12)",
+        "destinationStation": "Vijayawada PNBS Parcel Counter",
+        "parcelReceiptNumber": "LR-TSRTC-88912",
+        "dispatchDate": "2026-11-13T14:01:50.162Z",
+        "expectedArrivalDate": null,
+        "notes": "Bus No: TS 09 Z 4410"
+      },
+      "cancellationRequested": false,
+      "createdAt": "2026-11-13T14:01:50.154Z"
+    },
+    {
+      "id": "ord-1794578510144",
+      "orderNumber": "ABT-2026-841150",
+      "status": "PREPARING",
+      "customerName": "Test Customer Lifecycle",
+      "customerPhone": "9848099991",
+      "customerEmail": null,
+      "shippingAddress": {
+        "recipientName": "Test Customer",
+        "phone": "9848099991",
+        "street": "Station Road",
+        "city": "Vijayawada",
+        "state": "Andhra Pradesh",
+        "postalCode": "520001"
+      },
+      "transitMethod": "BUS_PARCEL",
+      "subtotal": 180,
+      "discountAmount": 0,
+      "shippingFee": 100,
+      "totalAmount": 280,
+      "paymentStatus": "PENDING",
+      "razorpayOrderId": null,
+      "adminNotes": "Confirmed by owner | Packing in thermocol box",
+      "items": [
+        {
+          "id": "oi-1794578510144-99",
+          "productId": "prod-fish-001",
+          "variantId": "var-rdg-male",
+          "productName": "Red Dragon Dumbo Guppy",
+          "variantTitle": "Male (Show Grade)",
+          "priceSnapshot": 180,
+          "quantity": 1,
+          "totalSnapshot": 180
+        }
+      ],
+      "shipment": null,
+      "cancellationRequested": false,
+      "createdAt": "2026-11-13T14:01:50.144Z"
+    },
+    {
+      "id": "ord-1794578467433",
+      "orderNumber": "ABT-2026-428066",
+      "status": "PENDING",
+      "customerName": "Price Tamper Attacker",
+      "customerPhone": "+919848077711",
+      "customerEmail": null,
+      "shippingAddress": {
+        "recipientName": "Attacker",
+        "phone": "+919848077711",
+        "street": "Cyber Road",
+        "city": "Hyderabad",
+        "state": "Telangana",
+        "postalCode": "500001"
+      },
+      "transitMethod": "BUS_PARCEL",
+      "subtotal": 450,
+      "discountAmount": 0,
+      "shippingFee": 100,
+      "totalAmount": 550,
+      "paymentStatus": "PENDING",
+      "razorpayOrderId": null,
+      "adminNotes": null,
+      "items": [
+        {
+          "id": "oi-1794578467433-105",
+          "productId": "prod-fish-002",
+          "variantId": "var-deb-male",
+          "productName": "Dumbo Ear Halfmoon Betta",
+          "variantTitle": "Male Show Grade",
+          "priceSnapshot": 450,
+          "quantity": 1,
+          "totalSnapshot": 450
+        }
+      ],
+      "shipment": null,
+      "cancellationRequested": false,
+      "createdAt": "2026-11-13T14:01:07.433Z"
+    },
+    {
+      "id": "ord-1794578438986",
+      "orderNumber": "ABT-2026-412659",
+      "status": "PENDING",
+      "customerName": "Price Tamper Attacker",
+      "customerPhone": "+919848077711",
+      "customerEmail": null,
+      "shippingAddress": {
+        "recipientName": "Attacker",
+        "phone": "+919848077711",
+        "street": "Cyber Road",
+        "city": "Hyderabad",
+        "state": "Telangana",
+        "postalCode": "500001"
+      },
+      "transitMethod": "BUS_PARCEL",
+      "subtotal": 450,
+      "discountAmount": 0,
+      "shippingFee": 100,
+      "totalAmount": 550,
+      "paymentStatus": "PENDING",
+      "razorpayOrderId": null,
+      "adminNotes": null,
+      "items": [
+        {
+          "id": "oi-1794578438986-662",
+          "productId": "prod-fish-002",
+          "variantId": "var-deb-male",
+          "productName": "Dumbo Ear Halfmoon Betta",
+          "variantTitle": "Male Show Grade",
+          "priceSnapshot": 450,
+          "quantity": 1,
+          "totalSnapshot": 450
+        }
+      ],
+      "shipment": null,
+      "cancellationRequested": false,
+      "createdAt": "2026-11-13T14:00:38.986Z"
+    },
+    {
       "id": "order-hist-001",
       "orderNumber": "ABT-2026-104921",
       "status": "DELIVERED",
@@ -991,7 +1558,7 @@
     {
       "id": "order-hist-002",
       "orderNumber": "ABT-2026-209843",
-      "status": "SHIPPED",
+      "status": "DELIVERED",
       "customerName": "Suresh Varma",
       "customerPhone": "+919440187654",
       "customerEmail": "suresh.varma@rediffmail.com",
@@ -1053,7 +1620,7 @@
     {
       "id": "order-hist-003",
       "orderNumber": "ABT-2026-302194",
-      "status": "PREPARING",
+      "status": "SHIPPED",
       "customerName": "Lakshmi Priya",
       "customerPhone": "+919701234567",
       "customerEmail": "lakshmi.priya@outlook.com",
@@ -1116,14 +1683,26 @@
           "totalSnapshot": 380
         }
       ],
-      "shipment": null,
+      "shipment": {
+        "id": "ship-1794578147898",
+        "orderId": "order-hist-003",
+        "trackingNumber": "ABT-TRK-201249",
+        "transportMethod": "RAILWAY_PARCEL",
+        "operatorName": "East Coast Railway (ECoR)",
+        "departureLocation": "Jubilee Bus Station (JBS)",
+        "destinationStation": "Tirupati Central Station/Stand",
+        "parcelReceiptNumber": null,
+        "dispatchDate": "2026-11-13T13:55",
+        "expectedArrivalDate": null,
+        "notes": null
+      },
       "cancellationRequested": false,
       "createdAt": "2026-11-13T09:20:00Z"
     },
     {
       "id": "order-hist-004",
       "orderNumber": "ABT-2026-401923",
-      "status": "PENDING",
+      "status": "SHIPPED",
       "customerName": "Venkat Naidu",
       "customerPhone": "+919123456780",
       "customerEmail": "venkat.naidu@gmail.com",
@@ -1156,12 +1735,63 @@
           "totalSnapshot": 890
         }
       ],
-      "shipment": null,
+      "shipment": {
+        "id": "ship-1794578163803",
+        "orderId": "order-hist-004",
+        "trackingNumber": "ABT-TRK-294530",
+        "transportMethod": "RAILWAY_PARCEL",
+        "operatorName": "South Central Railway (SCR)",
+        "departureLocation": "MGBS Hyderabad (Parcel Counter)",
+        "destinationStation": "Kurnool Central Station/Stand",
+        "parcelReceiptNumber": null,
+        "dispatchDate": "2026-11-13T13:55",
+        "expectedArrivalDate": null,
+        "notes": null
+      },
       "cancellationRequested": false,
       "createdAt": "2026-11-13T12:05:00Z"
     }
   ],
   "shipments": [
+    {
+      "id": "ship-1794578510162",
+      "orderId": "ord-1794578510154",
+      "trackingNumber": "ABT-TRK-211331",
+      "transportMethod": "BUS_PARCEL",
+      "operatorName": "TSRTC Parcel Express",
+      "departureLocation": "MGBS Hyderabad (Bay 12)",
+      "destinationStation": "Vijayawada PNBS Parcel Counter",
+      "parcelReceiptNumber": "LR-TSRTC-88912",
+      "dispatchDate": "2026-11-13T14:01:50.162Z",
+      "expectedArrivalDate": null,
+      "notes": "Bus No: TS 09 Z 4410"
+    },
+    {
+      "id": "ship-1794578163803",
+      "orderId": "order-hist-004",
+      "trackingNumber": "ABT-TRK-294530",
+      "transportMethod": "RAILWAY_PARCEL",
+      "operatorName": "South Central Railway (SCR)",
+      "departureLocation": "MGBS Hyderabad (Parcel Counter)",
+      "destinationStation": "Kurnool Central Station/Stand",
+      "parcelReceiptNumber": null,
+      "dispatchDate": "2026-11-13T13:55",
+      "expectedArrivalDate": null,
+      "notes": null
+    },
+    {
+      "id": "ship-1794578147898",
+      "orderId": "order-hist-003",
+      "trackingNumber": "ABT-TRK-201249",
+      "transportMethod": "RAILWAY_PARCEL",
+      "operatorName": "East Coast Railway (ECoR)",
+      "departureLocation": "Jubilee Bus Station (JBS)",
+      "destinationStation": "Tirupati Central Station/Stand",
+      "parcelReceiptNumber": null,
+      "dispatchDate": "2026-11-13T13:55",
+      "expectedArrivalDate": null,
+      "notes": null
+    },
     {
       "id": "ship-001",
       "orderId": "order-hist-001",
@@ -1189,8 +1819,135 @@
       "notes": "Departs on overnight service. Please carry Govt ID and LR receipt copy for parcel collection."
     }
   ],
-  "cancellations": [],
+  "cancellations": [
+    {
+      "id": "canc-1794578561200",
+      "orderId": "ord-1794578561197",
+      "orderNumber": "ABT-2026-748783",
+      "profileId": null,
+      "customerName": "Concurrent Cancel Customer",
+      "customerPhone": "+919848099112",
+      "reason": "Defective order request",
+      "explanation": "Mistake",
+      "status": "APPROVED",
+      "adminResponse": "First call",
+      "isStockRestored": true,
+      "refundStatus": "NO_PAYMENT",
+      "createdAt": "2026-11-13T14:02:41.200Z",
+      "resolvedAt": "2026-11-13T14:02:41.202Z"
+    },
+    {
+      "id": "canc-1794578561191",
+      "orderId": "ord-1794578561187",
+      "orderNumber": "ABT-2026-309551",
+      "profileId": null,
+      "customerName": "Cancellation Test Customer",
+      "customerPhone": "+919848077788",
+      "reason": "Changed mind",
+      "explanation": "Already bought another filter",
+      "status": "APPROVED",
+      "adminResponse": "Approved refund",
+      "isStockRestored": true,
+      "refundStatus": "NO_PAYMENT",
+      "createdAt": "2026-11-13T14:02:41.191Z",
+      "resolvedAt": "2026-11-13T14:02:41.194Z"
+    },
+    {
+      "id": "canc-1794578510218",
+      "orderId": "ord-1794578510214",
+      "orderNumber": "ABT-2026-381831",
+      "profileId": null,
+      "customerName": "Ramesh Babu",
+      "customerPhone": "9848011111",
+      "reason": "Changed aquarium plan",
+      "explanation": "Want to buy bigger setup",
+      "status": "APPROVED",
+      "adminResponse": "Refund processed",
+      "isStockRestored": true,
+      "refundStatus": "NO_PAYMENT",
+      "createdAt": "2026-11-13T14:01:50.219Z",
+      "resolvedAt": "2026-11-13T14:01:50.221Z"
+    }
+  ],
   "reviews": [
+    {
+      "id": "rev-1794578570396",
+      "productId": "prod-fish-001",
+      "productName": "Red Dragon Dumbo Guppy",
+      "customerName": "Random Visitor",
+      "rating": 4,
+      "title": null,
+      "comment": "Looks good on website",
+      "imageUrls": [],
+      "isVerifiedPurchase": false,
+      "isApproved": true,
+      "createdAt": "2026-11-13T14:02:50.396Z"
+    },
+    {
+      "id": "rev-1794578570393",
+      "productId": "prod-fish-001",
+      "productName": "Red Dragon Dumbo Guppy",
+      "customerName": "Ramesh Rao",
+      "rating": 5,
+      "title": "Verified purchase test",
+      "comment": "Super healthy fish, arrived active in Vijayawada!",
+      "imageUrls": [],
+      "isVerifiedPurchase": true,
+      "isApproved": true,
+      "createdAt": "2026-11-13T14:02:50.393Z"
+    },
+    {
+      "id": "rev-1794578561362",
+      "productId": "prod-fish-001",
+      "productName": "Red Dragon Dumbo Guppy",
+      "customerName": "Random Visitor",
+      "rating": 4,
+      "title": null,
+      "comment": "Looks good on website",
+      "imageUrls": [],
+      "isVerifiedPurchase": false,
+      "isApproved": true,
+      "createdAt": "2026-11-13T14:02:41.362Z"
+    },
+    {
+      "id": "rev-1794578561357",
+      "productId": "prod-fish-001",
+      "productName": "Red Dragon Dumbo Guppy",
+      "customerName": "Ramesh Rao",
+      "rating": 5,
+      "title": "Verified purchase test",
+      "comment": "Super healthy fish, arrived active in Vijayawada!",
+      "imageUrls": [],
+      "isVerifiedPurchase": true,
+      "isApproved": true,
+      "createdAt": "2026-11-13T14:02:41.357Z"
+    },
+    {
+      "id": "rev-1794578510461",
+      "productId": "prod-fish-001",
+      "productName": "Red Dragon Dumbo Guppy",
+      "customerName": "Random Visitor",
+      "rating": 4,
+      "title": null,
+      "comment": "Looks good on website",
+      "imageUrls": [],
+      "isVerifiedPurchase": false,
+      "isApproved": true,
+      "createdAt": "2026-11-13T14:01:50.461Z"
+    },
+    {
+      "id": "rev-1794578510455",
+      "productId": "prod-fish-001",
+      "productName": "Red Dragon Dumbo Guppy",
+      "customerName": "Ramesh Rao",
+      "rating": 5,
+      "title": "Verified purchase test",
+      "comment": "Super healthy fish, arrived active in Vijayawada!",
+      "imageUrls": [],
+      "isVerifiedPurchase": true,
+      "isApproved": true,
+      "createdAt": "2026-11-13T14:01:50.456Z"
+    },
     {
       "id": "rev-1794577802304",
       "productId": "prod-fish-001",
@@ -1262,10 +2019,290 @@
       "createdAt": "2026-11-09T17:45:00Z"
     }
   ],
-  "priceHistory": [],
-  "inventoryMovements": [],
+  "priceHistory": [
+    {
+      "id": "ph-1794578510204",
+      "variantId": "var-rdg-male",
+      "oldPrice": 180,
+      "newPrice": 399,
+      "changedBy": "Admin",
+      "reason": "Festival discount update",
+      "createdAt": "2026-11-13T14:01:50.204Z"
+    }
+  ],
+  "inventoryMovements": [
+    {
+      "id": "im-ful-1794578150812-var-prime-250ml",
+      "variantId": "var-prime-250ml",
+      "changeType": "ORDER_FULFILLMENT",
+      "quantity": -1,
+      "remainingStock": 24,
+      "reason": "Order ABT-2026-401923 confirmed",
+      "referenceId": "order-hist-004",
+      "createdAt": "2026-11-13T13:55:50.812Z"
+    },
+    {
+      "id": "im-res-1794578438986-var-deb-male",
+      "variantId": "var-deb-male",
+      "changeType": "ORDER_RESERVATION",
+      "quantity": 1,
+      "remainingStock": 11,
+      "reason": "Reserved for checkout",
+      "createdAt": "2026-11-13T14:00:38.986Z"
+    },
+    {
+      "id": "im-res-1794578467432-var-deb-male",
+      "variantId": "var-deb-male",
+      "changeType": "ORDER_RESERVATION",
+      "quantity": 1,
+      "remainingStock": 10,
+      "reason": "Reserved for checkout",
+      "createdAt": "2026-11-13T14:01:07.432Z"
+    },
+    {
+      "id": "im-res-1794578510144-var-rdg-male",
+      "variantId": "var-rdg-male",
+      "changeType": "ORDER_RESERVATION",
+      "quantity": 1,
+      "remainingStock": 34,
+      "reason": "Reserved for checkout",
+      "createdAt": "2026-11-13T14:01:50.144Z"
+    },
+    {
+      "id": "im-ful-1794578510147-var-rdg-male",
+      "variantId": "var-rdg-male",
+      "changeType": "ORDER_FULFILLMENT",
+      "quantity": -1,
+      "remainingStock": 34,
+      "reason": "Order ABT-2026-841150 confirmed",
+      "referenceId": "ord-1794578510144",
+      "createdAt": "2026-11-13T14:01:50.147Z"
+    },
+    {
+      "id": "im-res-1794578510154-var-rdg-male",
+      "variantId": "var-rdg-male",
+      "changeType": "ORDER_RESERVATION",
+      "quantity": 1,
+      "remainingStock": 33,
+      "reason": "Reserved for checkout",
+      "createdAt": "2026-11-13T14:01:50.154Z"
+    },
+    {
+      "id": "im-ful-1794578510158-var-rdg-male",
+      "variantId": "var-rdg-male",
+      "changeType": "ORDER_FULFILLMENT",
+      "quantity": -1,
+      "remainingStock": 33,
+      "reason": "Order ABT-2026-921232 confirmed",
+      "referenceId": "ord-1794578510154",
+      "createdAt": "2026-11-13T14:01:50.158Z"
+    },
+    {
+      "id": "im-1794578510209",
+      "variantId": "var-rdg-male",
+      "changeType": "MANUAL_ADJUSTMENT",
+      "quantity": 10,
+      "remainingStock": 43,
+      "reason": "Breeder shipment received",
+      "createdAt": "2026-11-13T14:01:50.209Z"
+    },
+    {
+      "id": "im-res-1794578510213-var-rdg-male",
+      "variantId": "var-rdg-male",
+      "changeType": "ORDER_RESERVATION",
+      "quantity": 2,
+      "remainingStock": 41,
+      "reason": "Reserved for checkout",
+      "createdAt": "2026-11-13T14:01:50.213Z"
+    },
+    {
+      "id": "im-ful-1794578510216-var-rdg-male",
+      "variantId": "var-rdg-male",
+      "changeType": "ORDER_FULFILLMENT",
+      "quantity": -2,
+      "remainingStock": 41,
+      "reason": "Order ABT-2026-381831 confirmed",
+      "referenceId": "ord-1794578510214",
+      "createdAt": "2026-11-13T14:01:50.216Z"
+    },
+    {
+      "id": "im-rst-1794578510221-var-rdg-male",
+      "variantId": "var-rdg-male",
+      "changeType": "CANCELLATION_RESTORE",
+      "quantity": 2,
+      "remainingStock": 43,
+      "reason": "Order ABT-2026-381831 cancelled by admin",
+      "referenceId": "ord-1794578510214",
+      "createdAt": "2026-11-13T14:01:50.221Z"
+    },
+    {
+      "id": "im-res-1794578561169-var-tetra-5",
+      "variantId": "var-tetra-5",
+      "changeType": "ORDER_RESERVATION",
+      "quantity": 3,
+      "remainingStock": 32,
+      "reason": "Reserved for checkout",
+      "createdAt": "2026-11-13T14:02:41.169Z"
+    },
+    {
+      "id": "im-res-1794578561178-var-an-lava",
+      "variantId": "var-an-lava",
+      "changeType": "ORDER_RESERVATION",
+      "quantity": 1,
+      "remainingStock": 1,
+      "reason": "Reserved for checkout",
+      "createdAt": "2026-11-13T14:02:41.178Z"
+    },
+    {
+      "id": "im-res-1794578561179-var-an-lava",
+      "variantId": "var-an-lava",
+      "changeType": "ORDER_RESERVATION",
+      "quantity": 1,
+      "remainingStock": 0,
+      "reason": "Reserved for checkout",
+      "createdAt": "2026-11-13T14:02:41.179Z"
+    },
+    {
+      "id": "im-res-1794578561183-var-as-std",
+      "variantId": "var-as-std",
+      "changeType": "ORDER_RESERVATION",
+      "quantity": 2,
+      "remainingStock": 33,
+      "reason": "Reserved for checkout",
+      "createdAt": "2026-11-13T14:02:41.183Z"
+    },
+    {
+      "id": "im-ful-1794578561185-var-as-std",
+      "variantId": "var-as-std",
+      "changeType": "ORDER_FULFILLMENT",
+      "quantity": -2,
+      "remainingStock": 33,
+      "reason": "Order ABT-2026-865897 confirmed",
+      "referenceId": "ord-1794578561183",
+      "createdAt": "2026-11-13T14:02:41.185Z"
+    },
+    {
+      "id": "im-res-1794578561187-var-spf-double",
+      "variantId": "var-spf-double",
+      "changeType": "ORDER_RESERVATION",
+      "quantity": 2,
+      "remainingStock": 38,
+      "reason": "Reserved for checkout",
+      "createdAt": "2026-11-13T14:02:41.187Z"
+    },
+    {
+      "id": "im-ful-1794578561189-var-spf-double",
+      "variantId": "var-spf-double",
+      "changeType": "ORDER_FULFILLMENT",
+      "quantity": -2,
+      "remainingStock": 38,
+      "reason": "Order ABT-2026-309551 confirmed",
+      "referenceId": "ord-1794578561187",
+      "createdAt": "2026-11-13T14:02:41.189Z"
+    },
+    {
+      "id": "im-rst-1794578561194-var-spf-double",
+      "variantId": "var-spf-double",
+      "changeType": "CANCELLATION_RESTORE",
+      "quantity": 2,
+      "remainingStock": 40,
+      "reason": "Order ABT-2026-309551 cancelled by admin",
+      "referenceId": "ord-1794578561187",
+      "createdAt": "2026-11-13T14:02:41.194Z"
+    },
+    {
+      "id": "im-res-1794578561197-var-jf-wood",
+      "variantId": "var-jf-wood",
+      "changeType": "ORDER_RESERVATION",
+      "quantity": 1,
+      "remainingStock": 24,
+      "reason": "Reserved for checkout",
+      "createdAt": "2026-11-13T14:02:41.197Z"
+    },
+    {
+      "id": "im-ful-1794578561198-var-jf-wood",
+      "variantId": "var-jf-wood",
+      "changeType": "ORDER_FULFILLMENT",
+      "quantity": -1,
+      "remainingStock": 24,
+      "reason": "Order ABT-2026-748783 confirmed",
+      "referenceId": "ord-1794578561197",
+      "createdAt": "2026-11-13T14:02:41.198Z"
+    },
+    {
+      "id": "im-rst-1794578561202-var-jf-wood",
+      "variantId": "var-jf-wood",
+      "changeType": "CANCELLATION_RESTORE",
+      "quantity": 1,
+      "remainingStock": 25,
+      "reason": "Order ABT-2026-748783 cancelled by admin",
+      "referenceId": "ord-1794578561197",
+      "createdAt": "2026-11-13T14:02:41.202Z"
+    },
+    {
+      "id": "im-1794578561205",
+      "variantId": "var-mc-cup",
+      "changeType": "MANUAL_ADJUSTMENT",
+      "quantity": 5,
+      "remainingStock": 35,
+      "reason": "Received new nursery batch",
+      "createdAt": "2026-11-13T14:02:41.205Z"
+    },
+    {
+      "id": "im-1794578561207",
+      "variantId": "var-mc-cup",
+      "changeType": "MANUAL_ADJUSTMENT",
+      "quantity": -2,
+      "remainingStock": 33,
+      "reason": "Disposed yellowed cups",
+      "createdAt": "2026-11-13T14:02:41.207Z"
+    },
+    {
+      "id": "im-1794578561209",
+      "variantId": "var-mc-cup",
+      "changeType": "MANUAL_ADJUSTMENT",
+      "quantity": -3,
+      "remainingStock": 30,
+      "reason": "Revert test adjustment",
+      "createdAt": "2026-11-13T14:02:41.209Z"
+    },
+    {
+      "id": "im-res-1794578570251-var-tetra-5",
+      "variantId": "var-tetra-5",
+      "changeType": "ORDER_RESERVATION",
+      "quantity": 3,
+      "remainingStock": 29,
+      "reason": "Reserved for checkout",
+      "createdAt": "2026-11-13T14:02:50.251Z"
+    },
+    {
+      "id": "im-res-1794578688386-var-deb-male",
+      "variantId": "var-deb-male",
+      "changeType": "ORDER_RESERVATION",
+      "quantity": 1,
+      "remainingStock": 9,
+      "reason": "Reserved for checkout",
+      "createdAt": "2026-11-13T14:04:48.386Z"
+    },
+    {
+      "id": "im-res-1794578722655-var-deb-male",
+      "variantId": "var-deb-male",
+      "changeType": "ORDER_RESERVATION",
+      "quantity": 1,
+      "remainingStock": 8,
+      "reason": "Reserved for checkout",
+      "createdAt": "2026-11-13T14:05:22.655Z"
+    }
+  ],
   "processedPaymentEvents": [
-    "evt_test_1794577802289"
+    "evt_test_1794577802289",
+    "evt_sec_test_1794578439000",
+    "evt_sec_test_1794578467461",
+    "evt_test_1794578510438",
+    "evt_test_1794578561344",
+    "evt_test_1794578570384",
+    "evt_sec_test_1794578688398",
+    "evt_sec_test_1794578722670"
   ],
   "adminSettings": {
     "store_name": "AquaBark Telugu",

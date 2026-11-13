@@ -1,10 +1,16 @@
 "use client";
 
-import React, { useState } from "react";
-import { MessageCircle, X } from "lucide-react";
+import React from "react";
+import { usePathname } from "next/navigation";
+import { MessageCircle } from "lucide-react";
 
 export function WhatsAppFloat() {
-  const [showTooltip, setShowTooltip] = useState(true);
+  const pathname = usePathname();
+
+  // Strictly NEVER render WhatsApp floating button on admin pages
+  if (pathname && pathname.startsWith("/admin")) {
+    return null;
+  }
 
   const phone = "919490012345";
   const defaultMessage = encodeURIComponent(
@@ -12,35 +18,17 @@ export function WhatsAppFloat() {
   );
 
   return (
-    <div className="fixed bottom-6 right-6 z-40 flex flex-col items-end gap-2">
-      {/* Tooltip bubble */}
-      {showTooltip && (
-        <div className="bg-white border border-aquabark-border shadow-card rounded-2xl p-3 max-w-[240px] text-xs relative animate-bounce">
-          <button
-            onClick={() => setShowTooltip(false)}
-            className="absolute -top-1.5 -right-1.5 bg-gray-100 rounded-full p-0.5 text-gray-500 hover:text-black"
-          >
-            <X className="w-3 h-3" />
-          </button>
-          <p className="font-bold text-aquabark-dark">Need Live Transit Advice?</p>
-          <p className="text-aquabark-muted text-[11px] mt-0.5">
-            Chat with our breeder team on WhatsApp for Andhra & Telangana parcel timings!
-          </p>
-        </div>
-      )}
-
-      {/* Floating button */}
+    <div className="fixed bottom-6 right-6 z-40">
       <a
         href={`https://wa.me/${phone}?text=${defaultMessage}`}
         target="_blank"
         rel="noopener noreferrer"
-        className="w-14 h-14 rounded-full bg-[#25D366] text-white flex items-center justify-center shadow-lg hover:scale-110 active:scale-95 transition-all group relative"
+        className="w-13 h-13 sm:w-14 sm:h-14 rounded-full bg-[#25D366] hover:bg-[#20ba59] text-white flex items-center justify-center shadow-lg transition-transform hover:scale-105 active:scale-95"
         aria-label="Chat on WhatsApp"
+        title="Chat on WhatsApp"
       >
-        <span className="absolute -top-1 -right-1 w-3.5 h-3.5 bg-red-500 rounded-full border-2 border-white animate-pulse" />
-        <MessageCircle className="w-7 h-7 fill-white text-[#25D366]" />
+        <MessageCircle className="w-6 h-6 sm:w-7 sm:h-7 fill-white text-[#25D366]" />
       </a>
     </div>
   );
 }
-

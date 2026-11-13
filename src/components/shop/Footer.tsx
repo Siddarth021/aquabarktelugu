@@ -1,12 +1,17 @@
 "use client";
 
-"use client";
-
 import React from "react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { Fish, ShieldCheck, Truck, HeartHandshake, PhoneCall, Mail, MapPin, ArrowRight } from "lucide-react";
 
 export function Footer() {
+  const pathname = usePathname();
+
+  // Complete Isolation: Strictly NEVER render public customer footer on admin routes
+  if (pathname && pathname.startsWith("/admin")) {
+    return null;
+  }
   return (
     <footer className="bg-aquabark-darker text-white pt-16 pb-12 border-t border-emerald-950">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -75,7 +80,7 @@ export function Footer() {
             <h4 className="font-serif font-bold text-aquabark-primary text-base">Safe Transit</h4>
             <ul className="space-y-2 text-xs text-white/70">
               <li><Link href="/track" className="hover:text-aquabark-primary transition-colors">Track Live Parcel</Link></li>
-              <li><Link href="/policies/guarantee" className="hover:text-aquabark-primary transition-colors">100% Live Arrival Policy</Link></li>
+              <li><Link href="/policies/guarantee" className="hover:text-aquabark-primary transition-colors">Live Transit & DOA Policy</Link></li>
               <li><Link href="/policies/shipping" className="hover:text-aquabark-primary transition-colors">Bus & Train Dispatch Info</Link></li>
               <li><Link href="/policies/cancellation" className="hover:text-aquabark-primary transition-colors">Cancellations & Refunds</Link></li>
               <li><span className="text-emerald-400">Oxygen-Packed & Insulated</span></li>

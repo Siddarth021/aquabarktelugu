@@ -2,390 +2,238 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { OrderDTO, ProductDTO, CategoryDTO } from "@/types";
-import { OrderCard } from "@/components/admin/OrderCard";
-import { ShipmentModal } from "@/components/admin/ShipmentModal";
-import { StockModal } from "@/components/admin/StockModal";
-import { ProductFormModal } from "@/components/admin/ProductFormModal";
-import { ComboModal } from "@/components/admin/ComboModal";
+import { OrderDTO, OrderStatus } from "@/types";
 import { formatINR } from "@/lib/utils";
+import { OrderDetailModal } from "@/components/admin/OrderDetailModal";
+import { ShipmentModal } from "@/components/admin/ShipmentModal";
 import {
   ShoppingBag,
-  Clock,
-  TrendingUp,
-  AlertTriangle,
-  Plus,
-  Sparkles,
-  Truck,
-  RotateCcw,
-  Sliders,
-  ChevronRight,
-  Fish,
   Layers,
-  ArrowUpRight,
+  TrendingUp,
+  Eye,
+  ArrowRight,
+  Package,
 } from "lucide-react";
 
 interface AdminDashboardViewProps {
-  initialStats: {
-    todayOrdersCount: number;
-    todayOrdersValue: number;
-    pendingOrdersCount: number;
-    preparingOrdersCount: number;
-    totalSales: number;
-    totalOrdersCount: number;
-    lowStockCount: number;
-    lowStockItems: {
-      productId: string;
-      productName: string;
-      variantId: string;
-      variantTitle: string;
-      stock: number;
-      categoryName: string;
-    }[];
-    pendingCancellationsCount: number;
+  stats: {
+    newOrdersCount: number;
+    totalProductsCount: number;
+    salesTotal: number;
     recentOrders: OrderDTO[];
   };
-  allProducts: ProductDTO[];
-  allCategories: CategoryDTO[];
 }
 
-export function AdminDashboardView({
-  initialStats,
-  allProducts,
-  allCategories,
-}: AdminDashboardViewProps) {
-  const [stats, setStats] = useState(initialStats);
-  const [recentOrders, setRecentOrders] = useState<OrderDTO[]>(initialStats.recentOrders);
-
-  // Modals state
+export function AdminDashboardView({ stats }: AdminDashboardViewProps) {
+  const [orders, setOrders] = useState<OrderDTO[]>(stats.recentOrders);
+  const [selectedOrder, setSelectedOrder] = useState<OrderDTO | null>(null);
   const [shipmentOrder, setShipmentOrder] = useState<OrderDTO | null>(null);
-  const [stockModalTarget, setStockModalTarget] = useState<{
-    productName: string;
-    variantId: string;
-    variantTitle: string;
-    currentStock: number;
-  } | null>(null);
-  const [isProductModalOpen, setIsProductModalOpen] = useState(false);
-  const [isComboModalOpen, setIsComboModalOpen] = useState(false);
+
+  const getStatusBadge = (status: OrderStatus) => {
+    switch (status) {
+      case "PENDING":
+        return "bg-amber-100 text-amber-800 border-amber-200";
+      case "CONFIRMED":
+        return "bg-blue-100 text-blue-800 border-blue-200";
+      case "PREPARING":
+        return "bg-purple-100 text-purple-800 border-purple-200";
+      case "SHIPPED":
+        return "bg-teal-100 text-teal-800 border-teal-200";
+      case "DELIVERED":
+        return "bg-emerald-100 text-emerald-800 border-emerald-200";
+      case "CANCELLED":
+        return "bg-rose-100 text-rose-800 border-rose-200";
+    }
+  };
 
   const handleOrderUpdated = (updated: OrderDTO) => {
-    setRecentOrders((prev) => prev.map((o) => (o.id === updated.id ? updated : o)));
-    if (updated.status !== "PENDING") {
-      setStats((prev) => ({
-        ...prev,
-        pendingOrdersCount: Math.max(0, prev.pendingOrdersCount - 1),
-      }));
+    setOrders((prev) => prev.map((o) => (o.id === updated.id ? updated : o)));
+    if (selectedOrder?.id === updated.id) {
+      setSelectedOrder(updated);
     }
   };
 
   const handleShipmentSuccess = (trackingNumber: string) => {
     if (shipmentOrder) {
-      setRecentOrders((prev) =>
-        prev.map((o) =>
-          o.id === shipmentOrder.id
-            ? {
-                ...o,
-                status: "SHIPPED",
-                shipment: {
-                  id: `shp-${Date.now()}`,
-                  orderId: o.id,
-                  trackingNumber,
-                  transportMethod: o.transitMethod || "BUS_PARCEL",
-                  operatorName: "Parcel Express",
-                  departureLocation: "Hub",
-                  destinationStation: o.shippingAddress.city,
-                  dispatchDate: new Date().toISOString(),
-                },
-              }
-            : o
-        )
-      );
-    }
-  };
-
-  const handleStockSuccess = (newStock: number) => {
-    if (stockModalTarget) {
-      setStats((prev) => ({
-        ...prev,
-        lowStockItems: prev.lowStockItems.map((item) =>
-          item.variantId === stockModalTarget.variantId ? { ...item, stock: newStock } : item
-        ),
-      }));
+      const updatedShipment = {
+        ...shipmentOrder,
+        status: "SHIPPED" as OrderStatus,
+        shipment: {
+          id: `shp-${Date.now()}`,
+          orderId: shipmentOrder.id,
+          trackingNumber,
+          transportMethod: shipmentOrder.transitMethod || "BUS_PARCEL",
+          operatorName: "Parcel Express",
+          departureLocation: "Hub",
+          destinationStation: shipmentOrder.shippingAddress.city,
+          dispatchDate: new Date().toISOString(),
+        },
+      };
+      handleOrderUpdated(updatedShipment);
     }
   };
 
   return (
     <div className="space-y-6 animate-in fade-in">
-      {/* Top Banner / Store Status */}
-      <div className="p-4 sm:p-5 rounded-3xl bg-gradient-to-r from-aquabark-dark to-aquabark-darker text-white shadow-soft flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-        <div>
-          <div className="flex items-center gap-2 mb-1">
-            <span className="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-pulse" />
-            <span className="text-xs font-semibold text-aquabark-primary tracking-wide uppercase">
-              Operations Active • Telugu States
-            </span>
-          </div>
-          <h1 className="font-serif text-xl sm:text-2xl font-bold tracking-tight">
-            Store Performance & Orders
-          </h1>
-          <p className="text-xs text-slate-300 mt-0.5">
-            Dispatches from Hyderabad MGBS / Vijayawada PNBS Parcel Counters
-          </p>
-        </div>
-
-        {/* Quick Top Actions */}
-        <div className="flex items-center gap-2">
-          <button
-            onClick={() => setIsProductModalOpen(true)}
-            className="flex-1 sm:flex-none py-2.5 px-3.5 bg-aquabark-primary text-aquabark-dark hover:bg-aquabark-secondary font-bold text-xs rounded-xl shadow-xs transition-colors flex items-center justify-center gap-1.5 cursor-pointer"
-          >
-            <Plus className="w-4 h-4 stroke-[2.5]" />
-            <span>Add Product</span>
-          </button>
-          <button
-            onClick={() => setIsComboModalOpen(true)}
-            className="flex-1 sm:flex-none py-2.5 px-3.5 bg-white/10 hover:bg-white/20 text-white font-bold text-xs rounded-xl border border-white/20 transition-colors flex items-center justify-center gap-1.5 cursor-pointer"
-          >
-            <Sparkles className="w-4 h-4" />
-            <span>New Combo</span>
-          </button>
-        </div>
+      {/* Simple Welcome Header */}
+      <div>
+        <h1 className="font-serif text-2xl sm:text-3xl font-bold text-aquabark-dark tracking-tight">
+          Dashboard
+        </h1>
+        <p className="text-xs sm:text-sm text-slate-500 mt-1">
+          Your store at a glance.
+        </p>
       </div>
 
-      {/* METRIC CARDS (4-grid mobile-first) */}
-      <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
-        {/* Today's Orders */}
-        <div className="bg-white p-4 rounded-3xl border border-aquabark-border shadow-xs hover:shadow-md transition-shadow">
-          <div className="flex items-center justify-between text-aquabark-muted mb-2">
-            <span className="text-xs font-semibold uppercase tracking-wider">Today&apos;s Orders</span>
-            <div className="p-2 rounded-xl bg-blue-50 text-blue-700">
-              <ShoppingBag className="w-4 h-4" />
-            </div>
-          </div>
-          <div className="text-2xl sm:text-3xl font-extrabold text-aquabark-dark font-mono">
-            {stats.todayOrdersCount}
-          </div>
-          <p className="text-xs text-aquabark-muted mt-1">
-            Value: <span className="font-bold text-slate-700">{formatINR(stats.todayOrdersValue)}</span>
-          </p>
-        </div>
-
-        {/* Pending Orders Alert */}
+      {/* EXACTLY 3 PRIMARY STATISTICS CARDS */}
+      <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+        {/* 1. New Orders */}
         <Link
           href="/admin/orders?status=PENDING"
-          className="bg-white p-4 rounded-3xl border border-amber-200/80 shadow-xs hover:border-amber-400 hover:shadow-md transition-all group"
+          className="bg-white rounded-3xl p-5 border border-aquabark-border shadow-xs hover:border-amber-300 hover:shadow-md transition-all group"
         >
-          <div className="flex items-center justify-between text-amber-700 mb-2">
-            <span className="text-xs font-bold uppercase tracking-wider">Pending Orders</span>
-            <div className="p-2 rounded-xl bg-amber-50 text-amber-700 group-hover:bg-amber-100">
-              <Clock className="w-4 h-4" />
+          <div className="flex items-center justify-between mb-3">
+            <span className="text-xs font-bold text-slate-500 uppercase tracking-wider">
+              New Orders
+            </span>
+            <div className="w-10 h-10 rounded-2xl bg-amber-50 text-amber-600 flex items-center justify-center group-hover:scale-105 transition-transform">
+              <ShoppingBag className="w-5 h-5" />
             </div>
           </div>
-          <div className="flex items-baseline gap-2">
-            <span className="text-2xl sm:text-3xl font-extrabold text-amber-600 font-mono">
-              {stats.pendingOrdersCount}
-            </span>
-            <span className="text-[11px] font-bold text-amber-800 bg-amber-100 px-2 py-0.5 rounded-full">
-              Action Req.
-            </span>
+          <div className="text-3xl font-extrabold text-slate-800 font-mono">
+            {stats.newOrdersCount}
           </div>
-          <p className="text-xs text-amber-700/80 mt-1 flex items-center justify-between">
-            <span>Tap to process</span>
-            <ChevronRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" />
+          <p className="text-xs text-amber-700/90 font-medium mt-1">
+            Pending fulfillment
           </p>
         </Link>
 
-        {/* Total Sales */}
-        <div className="bg-white p-4 rounded-3xl border border-aquabark-border shadow-xs hover:shadow-md transition-shadow">
-          <div className="flex items-center justify-between text-aquabark-muted mb-2">
-            <span className="text-xs font-semibold uppercase tracking-wider">Total Sales</span>
-            <div className="p-2 rounded-xl bg-emerald-50 text-emerald-700">
-              <TrendingUp className="w-4 h-4" />
-            </div>
-          </div>
-          <div className="text-xl sm:text-2xl font-extrabold text-aquabark-dark font-mono truncate">
-            {formatINR(stats.totalSales)}
-          </div>
-          <p className="text-xs text-aquabark-muted mt-1">
-            Across {stats.totalOrdersCount} orders
-          </p>
-        </div>
-
-        {/* Low Stock Alerts */}
+        {/* 2. Total Products */}
         <Link
           href="/admin/products"
-          className="bg-white p-4 rounded-3xl border border-rose-200/80 shadow-xs hover:border-rose-400 hover:shadow-md transition-all group"
+          className="bg-white rounded-3xl p-5 border border-aquabark-border shadow-xs hover:border-aquabark-primary hover:shadow-md transition-all group"
         >
-          <div className="flex items-center justify-between text-rose-700 mb-2">
-            <span className="text-xs font-bold uppercase tracking-wider">Low Stock Items</span>
-            <div className="p-2 rounded-xl bg-rose-50 text-rose-700 group-hover:bg-rose-100">
-              <AlertTriangle className="w-4 h-4" />
-            </div>
-          </div>
-          <div className="flex items-baseline gap-2">
-            <span className="text-2xl sm:text-3xl font-extrabold text-rose-600 font-mono">
-              {stats.lowStockCount}
-            </span>
-            <span className="text-[11px] font-bold text-rose-800 bg-rose-100 px-2 py-0.5 rounded-full">
-              ≤ 5 units
-            </span>
-          </div>
-          <p className="text-xs text-rose-700/80 mt-1 flex items-center justify-between">
-            <span>View variants</span>
-            <ChevronRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" />
-          </p>
-        </Link>
-      </div>
-
-      {/* LOW STOCK ALERT CARD (Direct quick restock actions) */}
-      {stats.lowStockItems.length > 0 && (
-        <div className="bg-rose-50/70 border border-rose-200 rounded-3xl p-4 sm:p-5 shadow-xs">
           <div className="flex items-center justify-between mb-3">
-            <div className="flex items-center gap-2">
-              <div className="p-1.5 rounded-xl bg-rose-600 text-white">
-                <AlertTriangle className="w-4 h-4" />
-              </div>
-              <h3 className="text-sm font-bold text-rose-900">
-                Low Inventory Alert ({stats.lowStockItems.length} Variants)
-              </h3>
-            </div>
-            <Link
-              href="/admin/products"
-              className="text-xs font-bold text-rose-700 hover:text-rose-900 flex items-center gap-1"
-            >
-              <span>All Products</span>
-              <ArrowUpRight className="w-3.5 h-3.5" />
-            </Link>
-          </div>
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2.5">
-            {stats.lowStockItems.map((item) => (
-              <div
-                key={item.variantId}
-                className="bg-white p-3 rounded-2xl border border-rose-200/80 shadow-2xs flex items-center justify-between gap-2"
-              >
-                <div className="min-w-0">
-                  <h4 className="text-xs font-bold text-slate-800 truncate">{item.productName}</h4>
-                  <p className="text-[11px] text-slate-500 truncate">
-                    {item.variantTitle} •{" "}
-                    <span className="text-rose-600 font-extrabold">{item.stock} left</span>
-                  </p>
-                </div>
-                <button
-                  type="button"
-                  onClick={() =>
-                    setStockModalTarget({
-                      productName: item.productName,
-                      variantId: item.variantId,
-                      variantTitle: item.variantTitle,
-                      currentStock: item.stock,
-                    })
-                  }
-                  className="py-1.5 px-3 bg-rose-600 hover:bg-rose-700 text-white rounded-xl text-xs font-bold shrink-0 shadow-xs cursor-pointer transition-colors"
-                >
-                  Restock
-                </button>
-              </div>
-            ))}
-          </div>
-        </div>
-      )}
-
-      {/* QUICK ACTIONS BAR */}
-      <div>
-        <h3 className="text-xs font-bold text-aquabark-dark uppercase tracking-wider mb-2.5">
-          Quick Management Actions
-        </h3>
-        <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5">
-          <Link
-            href="/admin/orders?status=PREPARING"
-            className="p-3.5 bg-white rounded-2xl border border-aquabark-border hover:border-aquabark-primary flex items-center gap-3 transition-colors shadow-2xs group"
-          >
-            <div className="w-10 h-10 rounded-xl bg-teal-50 text-teal-700 flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform">
-              <Truck className="w-5 h-5" />
-            </div>
-            <div>
-              <span className="text-xs font-bold text-aquabark-dark block">Bus Dispatches</span>
-              <span className="text-[11px] text-aquabark-muted">
-                {stats.preparingOrdersCount} ready to pack
-              </span>
-            </div>
-          </Link>
-
-          <Link
-            href="/admin/products"
-            className="p-3.5 bg-white rounded-2xl border border-aquabark-border hover:border-aquabark-primary flex items-center gap-3 transition-colors shadow-2xs group"
-          >
-            <div className="w-10 h-10 rounded-xl bg-emerald-50 text-emerald-700 flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform">
+            <span className="text-xs font-bold text-slate-500 uppercase tracking-wider">
+              Total Products
+            </span>
+            <div className="w-10 h-10 rounded-2xl bg-aquabark-secondary text-aquabark-dark flex items-center justify-center group-hover:scale-105 transition-transform">
               <Layers className="w-5 h-5" />
             </div>
-            <div>
-              <span className="text-xs font-bold text-aquabark-dark block">Edit Prices</span>
-              <span className="text-[11px] text-aquabark-muted">Dynamic updates</span>
-            </div>
-          </Link>
+          </div>
+          <div className="text-3xl font-extrabold text-slate-800 font-mono">
+            {stats.totalProductsCount}
+          </div>
+          <p className="text-xs text-slate-500 font-medium mt-1">
+            Active in catalog
+          </p>
+        </Link>
 
-          <Link
-            href="/admin/cancellations"
-            className="p-3.5 bg-white rounded-2xl border border-aquabark-border hover:border-aquabark-primary flex items-center gap-3 transition-colors shadow-2xs group"
-          >
-            <div className="w-10 h-10 rounded-xl bg-amber-50 text-amber-700 flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform">
-              <RotateCcw className="w-5 h-5" />
+        {/* 3. Sales */}
+        <div className="bg-white rounded-3xl p-5 border border-aquabark-border shadow-xs">
+          <div className="flex items-center justify-between mb-3">
+            <span className="text-xs font-bold text-slate-500 uppercase tracking-wider">
+              Sales
+            </span>
+            <div className="w-10 h-10 rounded-2xl bg-emerald-50 text-emerald-700 flex items-center justify-center">
+              <TrendingUp className="w-5 h-5" />
             </div>
-            <div>
-              <span className="text-xs font-bold text-aquabark-dark block">Cancellations</span>
-              <span className="text-[11px] text-aquabark-muted">
-                {stats.pendingCancellationsCount} requests
-              </span>
-            </div>
-          </Link>
-
-          <Link
-            href="/admin/settings"
-            className="p-3.5 bg-white rounded-2xl border border-aquabark-border hover:border-aquabark-primary flex items-center gap-3 transition-colors shadow-2xs group"
-          >
-            <div className="w-10 h-10 rounded-xl bg-indigo-50 text-indigo-700 flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform">
-              <Sliders className="w-5 h-5" />
-            </div>
-            <div>
-              <span className="text-xs font-bold text-aquabark-dark block">Feasibility</span>
-              <span className="text-[11px] text-aquabark-muted">Routes & WhatsApp</span>
-            </div>
-          </Link>
+          </div>
+          <div className="text-2xl sm:text-3xl font-extrabold text-slate-800 font-mono truncate">
+            {formatINR(stats.salesTotal)}
+          </div>
+          <p className="text-xs text-emerald-700 font-medium mt-1">
+            Total verified revenue
+          </p>
         </div>
       </div>
 
-      {/* RECENT ORDERS FEED WITH 1-CLICK ACTION BUTTONS */}
-      <div className="space-y-3">
-        <div className="flex items-center justify-between">
+      {/* RECENT ORDERS TABLE / LIST */}
+      <div className="bg-white rounded-3xl border border-aquabark-border shadow-xs overflow-hidden">
+        {/* Table Header */}
+        <div className="p-5 sm:px-6 sm:py-4 border-b border-aquabark-border/60 flex items-center justify-between gap-3">
           <div>
-            <h3 className="text-base font-bold text-aquabark-dark">Recent Customer Orders</h3>
-            <p className="text-xs text-aquabark-muted">
-              Confirm, prepare, or dispatch orders with one click
-            </p>
+            <h3 className="font-bold text-aquabark-dark text-base">Recent Orders</h3>
+            <p className="text-xs text-slate-400">Latest customer purchases</p>
           </div>
           <Link
             href="/admin/orders"
-            className="text-xs font-bold text-aquabark-dark hover:text-aquabark-darker flex items-center gap-1 bg-white px-3 py-1.5 rounded-xl border border-aquabark-border shadow-2xs"
+            className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-2xl bg-aquabark-dark hover:bg-aquabark-darker text-white text-xs font-bold transition-colors shadow-xs"
           >
-            <span>View All</span>
-            <ChevronRight className="w-3.5 h-3.5" />
+            <span>View All Orders</span>
+            <ArrowRight className="w-3.5 h-3.5" />
           </Link>
         </div>
 
-        <div className="space-y-3">
-          {recentOrders.map((order) => (
-            <OrderCard
-              key={order.id}
-              order={order}
-              onOpenShipmentModal={(ord) => setShipmentOrder(ord)}
-              onStatusUpdated={handleOrderUpdated}
-            />
-          ))}
-        </div>
+        {/* List / Table */}
+        {orders.length === 0 ? (
+          <div className="p-12 text-center text-xs text-slate-400">
+            No recent orders found.
+          </div>
+        ) : (
+          <div className="overflow-x-auto">
+            <table className="w-full text-left text-xs">
+              <thead className="bg-slate-50/80 text-slate-500 font-bold uppercase tracking-wider border-b border-slate-100">
+                <tr>
+                  <th className="px-5 py-3">Order ID</th>
+                  <th className="px-5 py-3">Customer</th>
+                  <th className="px-5 py-3">Amount</th>
+                  <th className="px-5 py-3">Status</th>
+                  <th className="px-5 py-3 text-right">Action</th>
+                </tr>
+              </thead>
+              <tbody className="divide-y divide-slate-100 font-medium text-slate-700">
+                {orders.map((ord) => (
+                  <tr key={ord.id} className="hover:bg-slate-50/60 transition-colors">
+                    <td className="px-5 py-4 font-mono font-bold text-aquabark-dark whitespace-nowrap">
+                      #{ord.orderNumber}
+                    </td>
+                    <td className="px-5 py-4">
+                      <div className="font-bold text-slate-800">{ord.customerName}</div>
+                      <div className="text-[11px] text-slate-400">{ord.shippingAddress.city}</div>
+                    </td>
+                    <td className="px-5 py-4 font-mono font-bold text-slate-800 whitespace-nowrap">
+                      {formatINR(ord.totalAmount)}
+                    </td>
+                    <td className="px-5 py-4 whitespace-nowrap">
+                      <span
+                        className={`text-[10px] font-bold px-2.5 py-0.5 rounded-full border ${getStatusBadge(
+                          ord.status
+                        )}`}
+                      >
+                        {ord.status}
+                      </span>
+                    </td>
+                    <td className="px-5 py-4 text-right whitespace-nowrap">
+                      <button
+                        type="button"
+                        onClick={() => setSelectedOrder(ord)}
+                        className="inline-flex items-center gap-1 px-3 py-1.5 rounded-xl bg-slate-100 hover:bg-aquabark-secondary text-aquabark-dark text-xs font-bold transition-colors cursor-pointer"
+                      >
+                        <Eye className="w-3.5 h-3.5" />
+                        <span>View</span>
+                      </button>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        )}
       </div>
 
-      {/* Modals */}
+      {/* Order Detail Modal */}
+      {selectedOrder && (
+        <OrderDetailModal
+          order={selectedOrder}
+          isOpen={true}
+          onClose={() => setSelectedOrder(null)}
+          onOpenShipmentModal={(ord) => setShipmentOrder(ord)}
+          onOrderUpdated={handleOrderUpdated}
+        />
+      )}
+
+      {/* Shipment Modal */}
       {shipmentOrder && (
         <ShipmentModal
           order={shipmentOrder}
@@ -394,36 +242,6 @@ export function AdminDashboardView({
           onSuccess={handleShipmentSuccess}
         />
       )}
-
-      {stockModalTarget && (
-        <StockModal
-          isOpen={true}
-          onClose={() => setStockModalTarget(null)}
-          productName={stockModalTarget.productName}
-          variantId={stockModalTarget.variantId}
-          variantTitle={stockModalTarget.variantTitle}
-          currentStock={stockModalTarget.currentStock}
-          onSuccess={handleStockSuccess}
-        />
-      )}
-
-      <ProductFormModal
-        isOpen={isProductModalOpen}
-        onClose={() => setIsProductModalOpen(false)}
-        categories={allCategories}
-        onSuccess={() => {
-          setIsProductModalOpen(false);
-        }}
-      />
-
-      <ComboModal
-        isOpen={isComboModalOpen}
-        onClose={() => setIsComboModalOpen(false)}
-        products={allProducts}
-        onSuccess={() => {
-          setIsComboModalOpen(false);
-        }}
-      />
     </div>
   );
 }

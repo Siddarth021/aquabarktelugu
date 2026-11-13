@@ -4,23 +4,15 @@ import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import { useParams } from "next/navigation";
 import { 
-  Bus, 
-  Train, 
-  Truck, 
-  MapPin, 
-  Calendar, 
-  Receipt, 
-  ShieldCheck, 
-  MessageCircle, 
   ArrowLeft, 
-  Package, 
+  CheckCircle2, 
+  Clock, 
   AlertCircle,
   Loader2
 } from "lucide-react";
 import { getOrderAction } from "@/actions/orders";
-import { OrderDTO, TransportMethod } from "@/types";
+import { OrderDTO } from "@/types";
 import { formatINR } from "@/lib/utils";
-import { TrackingTimeline } from "@/components/shop/TrackingTimeline";
 
 export default function TrackDetailPage() {
   const params = useParams();
@@ -48,9 +40,10 @@ export default function TrackDetailPage() {
         const savedOrders = JSON.parse(localStorage.getItem("aquabark_orders") || "[]");
         const localMatch = savedOrders.find(
           (o: any) =>
-            o.orderNumber === trackingId ||
-            o.id === trackingId ||
-            o.shipment?.trackingNumber === trackingId
+            o.orderNumber?.toLowerCase() === trackingId.toLowerCase() ||
+            o.id?.toLowerCase() === trackingId.toLowerCase() ||
+            o.shipment?.trackingNumber?.toLowerCase() === trackingId.toLowerCase() ||
+            o.shipment?.parcelReceiptNumber?.toLowerCase() === trackingId.toLowerCase()
         );
 
         if (localMatch) {
@@ -62,7 +55,7 @@ export default function TrackDetailPage() {
         // 3. Fallback mock order for tracking demo
         const demoOrder: OrderDTO = {
           id: "ord-demo-1",
-          orderNumber: trackingId.startsWith("ABT-") ? trackingId : `ABT-2026-849201`,
+          orderNumber: trackingId.toUpperCase(),
           status: "SHIPPED",
           customerName: "Kiran Varma",
           customerPhone: "9848012345",
@@ -111,11 +104,11 @@ export default function TrackDetailPage() {
             transportMethod: "BUS_PARCEL",
             operatorName: "APSRTC Garuda Plus Bus Cargo",
             departureLocation: "Vijayawada Central PNBS Depot",
-            destinationStation: "Dwaraka Bus Station (RTC Complex), Visakhapatnam",
+            destinationStation: "Dwaraka Bus Station, Visakhapatnam",
             parcelReceiptNumber: "LR #VJA-RTC-98421",
             dispatchDate: new Date(Date.now() - 36000000).toISOString(),
             expectedArrivalDate: new Date(Date.now() + 18000000).toISOString(),
-            notes: "Keep in driver cabin or shaded front compartment. Fragile Live Oxygen Pack.",
+            notes: "Conditioned and packed with pure oxygen for regional transit.",
           },
         };
 
@@ -147,13 +140,13 @@ export default function TrackDetailPage() {
           <AlertCircle className="w-12 h-12 text-red-500 mx-auto" />
           <h2 className="font-serif text-2xl font-bold text-aquabark-dark">Tracking Record Not Found</h2>
           <p className="text-xs text-aquabark-muted">
-            We couldn't locate any parcel associated with "<strong>{trackingId}</strong>". Please verify your Order ID or contact farm support.
+            We couldn't locate any parcel associated with "<strong>{trackingId}</strong>".
           </p>
           <Link
             href="/track"
             className="inline-block mt-2 bg-aquabark-dark text-white text-xs font-bold px-6 py-3 rounded-full"
           >
-            Try Another Search
+            Track An Order
           </Link>
         </div>
       </div>
@@ -162,9 +155,47 @@ export default function TrackDetailPage() {
 
   const shipment = order.shipment;
 
+  const steps = [
+    {
+      title: "Order Placed & Confirmed",
+      status: "COMPLETED",
+      time: order.createdAt ? new Date(order.createdAt).toLocaleDateString("en-IN") : "Placed",
+    },
+    {
+      title: "Acclimation & Oxygen Packaging",
+      status: ["CONFIRMED", "PREPARING", "SHIPPED", "DELIVERED"].includes(order.status)
+        ? "COMPLETED"
+        : "CURRENT",
+      time: "Farm Tanks",
+    },
+    {
+      title: "Dispatched from Farm Hub",
+      status: ["SHIPPED", "DELIVERED"].includes(order.status)
+        ? "COMPLETED"
+        : order.status === "PREPARING"
+        ? "CURRENT"
+        : "PENDING",
+      time: shipment?.dispatchDate ? new Date(shipment.dispatchDate).toLocaleDateString("en-IN") : "Scheduled",
+    },
+    {
+      title: "In Transit on Bus / Train",
+      status: ["SHIPPED", "DELIVERED"].includes(order.status)
+        ? order.status === "DELIVERED"
+          ? "COMPLETED"
+          : "CURRENT"
+        : "PENDING",
+      time: "Overnight Cargo",
+    },
+    {
+      title: "Arrived at Destination Station Depot / Handed Over",
+      status: order.status === "DELIVERED" ? "COMPLETED" : "PENDING",
+      time: shipment?.expectedArrivalDate ? new Date(shipment.expectedArrivalDate).toLocaleDateString("en-IN") : "Pickup Counter",
+    },
+  ];
+
   return (
-    <div className="py-10 bg-aquabark-bg">
-      <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div className="py-16 sm:py-24 bg-aquabark-bg min-h-[75vh]">
+      <div className="max-w-2xl mx-auto px-4 sm:px-6">
         
         {/* Back Link */}
         <Link
@@ -172,174 +203,147 @@ export default function TrackDetailPage() {
           className="inline-flex items-center gap-1.5 text-xs font-bold text-aquabark-dark hover:text-aquabark-accent mb-6"
         >
           <ArrowLeft className="w-4 h-4" />
-          <span>Back to Parcel Search</span>
+          <span>Back to Track Order</span>
         </Link>
 
-        {/* Top Header Card */}
-        <div className="bg-white rounded-3xl border border-aquabark-border shadow-soft p-6 sm:p-8 mb-8">
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-6 border-b border-aquabark-border">
-            <div>
-              <span className="text-xs uppercase font-bold tracking-wider text-aquabark-terracotta">
-                Live Parcel Dispatch
-              </span>
-              <h1 className="font-serif text-2xl sm:text-3xl font-bold text-aquabark-dark mt-1">
-                Order #{order.orderNumber}
-              </h1>
-              <p className="text-xs text-aquabark-muted mt-1">
-                Placed on {order.createdAt ? new Date(order.createdAt).toLocaleDateString("en-IN") : "Recent"}
-              </p>
-            </div>
-
-            <div className="flex flex-wrap items-center gap-2">
-              <span className="text-xs font-bold px-3 py-1.5 rounded-full bg-emerald-100 text-emerald-800">
-                STATUS: {order.status}
-              </span>
-              <span className="text-xs font-bold px-3 py-1.5 rounded-full bg-blue-100 text-blue-800">
-                PAYMENT: {order.paymentStatus}
-              </span>
-            </div>
-          </div>
-
-          {/* Shipment Details Grid */}
-          {shipment ? (
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 pt-6 text-xs">
-              <div className="p-4 rounded-2xl bg-aquabark-secondary/30 border border-aquabark-border/60">
-                <div className="flex items-center gap-2 text-aquabark-dark font-bold mb-1">
-                  <Bus className="w-4 h-4 text-emerald-800" />
-                  <span>Carrier Operator</span>
-                </div>
-                <p className="font-semibold text-aquabark-text">{shipment.operatorName}</p>
-                <p className="text-[11px] text-aquabark-muted mt-0.5">
-                  Method: {shipment.transportMethod}
-                </p>
-              </div>
-
-              <div className="p-4 rounded-2xl bg-aquabark-secondary/30 border border-aquabark-border/60">
-                <div className="flex items-center gap-2 text-aquabark-dark font-bold mb-1">
-                  <Receipt className="w-4 h-4 text-emerald-800" />
-                  <span>Parcel Waybill / LR #</span>
-                </div>
-                <p className="font-mono font-bold text-emerald-900 text-sm">
-                  {shipment.parcelReceiptNumber || "Pending Counter Assignment"}
-                </p>
-                <p className="text-[11px] text-aquabark-muted mt-0.5">Show this at parcel counter</p>
-              </div>
-
-              <div className="p-4 rounded-2xl bg-aquabark-secondary/30 border border-aquabark-border/60">
-                <div className="flex items-center gap-2 text-aquabark-dark font-bold mb-1">
-                  <MapPin className="w-4 h-4 text-emerald-800" />
-                  <span>Pickup Station Depot</span>
-                </div>
-                <p className="font-semibold text-aquabark-text line-clamp-2">
-                  {shipment.destinationStation || order.shippingAddress.city}
-                </p>
-              </div>
-
-              <div className="p-4 rounded-2xl bg-aquabark-secondary/30 border border-aquabark-border/60">
-                <div className="flex items-center gap-2 text-aquabark-dark font-bold mb-1">
-                  <Calendar className="w-4 h-4 text-emerald-800" />
-                  <span>Expected Arrival</span>
-                </div>
-                <p className="font-semibold text-aquabark-text">
-                  {shipment.expectedArrivalDate
-                    ? new Date(shipment.expectedArrivalDate).toLocaleDateString("en-IN")
-                    : "Overnight (12-24h)"}
-                </p>
-                <p className="text-[11px] text-emerald-700 font-medium">Keep phone on for SMS</p>
-              </div>
-            </div>
-          ) : (
-            <div className="pt-6 text-xs text-aquabark-muted">
-              <p className="bg-amber-50 border border-amber-200 p-4 rounded-2xl text-amber-900 font-medium">
-                ⏳ Your order is currently being conditioned and packed in pure oxygen. Dispatch waybill and bus details will update here once the bus/train departs.
-              </p>
-            </div>
-          )}
-        </div>
-
-        {/* Timeline & Items Grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+        {/* Minimal Result Card */}
+        <div className="bg-white rounded-3xl border border-aquabark-border shadow-soft p-6 sm:p-8 space-y-6">
           
-          {/* Left: Interactive Timeline (7 Cols) */}
-          <div className="lg:col-span-7 bg-white rounded-3xl border border-aquabark-border shadow-soft p-6 sm:p-8">
-            <h2 className="font-serif text-xl font-bold text-aquabark-dark mb-6 pb-3 border-b border-aquabark-border">
-              Transit & Station Progress
-            </h2>
-            <TrackingTimeline order={order} />
+          {/* Header */}
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-5 border-b border-aquabark-border">
+            <div>
+              <span className="text-[11px] font-bold uppercase tracking-wider text-aquabark-terracotta">
+                Order Tracking
+              </span>
+              <h1 className="font-serif text-2xl font-bold text-aquabark-dark mt-0.5">
+                #{order.orderNumber}
+              </h1>
+              <p className="text-xs text-aquabark-muted">
+                Recipient: {order.shippingAddress?.recipientName} • {order.shippingAddress?.city}
+              </p>
+            </div>
 
-            {/* WhatsApp Dispatch Assistance */}
-            <div className="mt-8 pt-6 border-t border-aquabark-border flex items-center justify-between gap-4">
-              <div className="text-xs text-aquabark-muted">
-                <span className="font-bold text-aquabark-dark block">Need driver / conductor contact?</span>
-                <span>Our dispatch coordinator can share the live bus registration number.</span>
-              </div>
-              <a
-                href={`https://wa.me/919490012345?text=${encodeURIComponent(
-                  `Namaskaram! I am tracking Order #${order.orderNumber}. Could you share the bus conductor details / parcel update?`
-                )}`}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="bg-[#25D366] hover:bg-[#20ba59] text-white text-xs font-bold px-4 py-2.5 rounded-full flex items-center gap-1.5 shadow-sm transition-transform active:scale-95 flex-shrink-0"
+            <div>
+              <span
+                className={`inline-block px-4 py-1.5 rounded-full font-bold text-xs ${
+                  order.status === "DELIVERED"
+                    ? "bg-emerald-100 text-emerald-800"
+                    : order.status === "SHIPPED"
+                    ? "bg-blue-100 text-blue-800"
+                    : order.status === "PREPARING"
+                    ? "bg-amber-100 text-amber-800"
+                    : "bg-purple-100 text-purple-800"
+                }`}
               >
-                <MessageCircle className="w-4 h-4 fill-white" />
-                <span>WhatsApp Helpline</span>
-              </a>
+                Status: {order.status}
+              </span>
             </div>
           </div>
 
-          {/* Right: Items in Parcel & Receipt Summary (5 Cols) */}
-          <div className="lg:col-span-5 bg-white rounded-3xl border border-aquabark-border shadow-soft p-6 sm:p-8 space-y-6">
-            <h2 className="font-serif text-xl font-bold text-aquabark-dark pb-3 border-b border-aquabark-border">
-              Parcel Contents
-            </h2>
-
-            <div className="space-y-3">
+          {/* Products Ordered */}
+          <div>
+            <h3 className="font-serif font-bold text-sm text-aquabark-dark mb-3">
+              Products Ordered ({order.items.length})
+            </h3>
+            <div className="space-y-2">
               {order.items.map((item) => (
-                <div key={item.id} className="flex justify-between items-start text-xs">
+                <div
+                  key={item.id}
+                  className="flex justify-between items-center text-xs p-3 rounded-2xl bg-aquabark-bg border border-aquabark-border/60"
+                >
                   <div>
-                    <h4 className="font-bold text-aquabark-dark">{item.productName}</h4>
-                    <span className="text-[11px] text-aquabark-muted">
-                      {item.quantity}x {item.variantTitle}
+                    <span className="font-bold text-aquabark-dark">{item.productName}</span>
+                    <span className="text-[11px] text-aquabark-muted ml-2">
+                      ({item.quantity}x {item.variantTitle})
                     </span>
                   </div>
-                  <span className="font-bold text-aquabark-dark">
+                  <span className="font-semibold text-aquabark-dark">
                     {formatINR(item.totalSnapshot)}
                   </span>
                 </div>
               ))}
             </div>
+          </div>
 
-            <div className="space-y-2 text-xs text-aquabark-text pt-4 border-t border-aquabark-border">
-              <div className="flex justify-between">
-                <span>Subtotal</span>
-                <span className="font-semibold">{formatINR(order.subtotal)}</span>
-              </div>
-              {order.discountAmount > 0 && (
-                <div className="flex justify-between text-emerald-700">
-                  <span>Discount</span>
-                  <span>-{formatINR(order.discountAmount)}</span>
-                </div>
-              )}
-              <div className="flex justify-between">
-                <span>Oxygen Pack & Freight</span>
-                <span className="font-semibold">
-                  {order.shippingFee === 0 ? "FREE" : formatINR(order.shippingFee)}
-                </span>
-              </div>
-              <div className="flex justify-between text-base font-bold text-aquabark-dark pt-2 border-t border-aquabark-border">
-                <span>Total Amount</span>
-                <span>{formatINR(order.totalAmount)}</span>
-              </div>
-            </div>
+          {/* Clean Timeline (No Imaginary GPS) */}
+          <div className="pt-2">
+            <h3 className="font-serif font-bold text-sm text-aquabark-dark mb-4">
+              Delivery Timeline
+            </h3>
+            <div className="relative pl-6 space-y-6 before:absolute before:left-2.5 before:top-2 before:bottom-2 before:w-0.5 before:bg-aquabark-border">
+              {steps.map((st, idx) => {
+                const isCompleted = st.status === "COMPLETED";
+                const isCurrent = st.status === "CURRENT";
 
-            {/* Shipping Address */}
-            <div className="pt-4 border-t border-aquabark-border text-xs text-aquabark-muted space-y-1">
-              <span className="font-bold text-aquabark-dark block">Customer Delivery Details:</span>
-              <p>{order.shippingAddress.recipientName} ({order.customerPhone})</p>
-              <p>{order.shippingAddress.street}</p>
-              <p>{order.shippingAddress.city}, {order.shippingAddress.state} - {order.shippingAddress.postalCode}</p>
+                return (
+                  <div key={idx} className="relative flex items-start gap-3">
+                    <div
+                      className={`absolute -left-6 top-1 w-5 h-5 rounded-full flex items-center justify-center text-white text-[10px] ${
+                        isCompleted
+                          ? "bg-emerald-600 ring-2 ring-emerald-100"
+                          : isCurrent
+                          ? "bg-aquabark-terracotta ring-2 ring-amber-100 animate-pulse"
+                          : "bg-gray-200 text-gray-400"
+                      }`}
+                    >
+                      {isCompleted ? (
+                        <CheckCircle2 className="w-3 h-3" />
+                      ) : isCurrent ? (
+                        <Clock className="w-3 h-3" />
+                      ) : (
+                        <span className="w-1.5 h-1.5 rounded-full bg-gray-400" />
+                      )}
+                    </div>
+                    <div className="flex-1 flex justify-between items-start text-xs">
+                      <span
+                        className={`font-medium ${
+                          isCompleted || isCurrent ? "text-aquabark-dark font-semibold" : "text-aquabark-muted"
+                        }`}
+                      >
+                        {st.title}
+                      </span>
+                      <span className="text-[11px] text-aquabark-muted ml-2">{st.time}</span>
+                    </div>
+                  </div>
+                );
+              })}
             </div>
           </div>
+
+          {/* Dispatch Details Card */}
+          {shipment ? (
+            <div className="p-5 rounded-2xl bg-aquabark-secondary/30 border border-aquabark-border/60 space-y-2 text-xs">
+              <span className="font-serif font-bold text-sm text-aquabark-dark block mb-1">
+                Dispatch Details
+              </span>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-aquabark-text">
+                <div>
+                  <span className="text-aquabark-muted block text-[11px]">Carrier / Operator:</span>
+                  <span className="font-semibold">{shipment.operatorName}</span>
+                </div>
+                <div>
+                  <span className="text-aquabark-muted block text-[11px]">Parcel Receipt / LR #:</span>
+                  <span className="font-mono font-bold text-emerald-900">{shipment.parcelReceiptNumber || "Pending"}</span>
+                </div>
+                <div>
+                  <span className="text-aquabark-muted block text-[11px]">Destination Depot / Counter:</span>
+                  <span className="font-semibold">{shipment.destinationStation || order.shippingAddress.city}</span>
+                </div>
+                <div>
+                  <span className="text-aquabark-muted block text-[11px]">Expected Arrival Date:</span>
+                  <span className="font-semibold">
+                    {shipment.expectedArrivalDate
+                      ? new Date(shipment.expectedArrivalDate).toLocaleDateString("en-IN")
+                      : "Regional Overnight"}
+                  </span>
+                </div>
+              </div>
+            </div>
+          ) : (
+            <div className="p-4 rounded-2xl bg-amber-50 border border-amber-200 text-xs text-amber-900">
+              Livestock is currently in conditioning tanks and preparing for scheduled regional parcel dispatch. Waybill details will appear as soon as the vehicle departs.
+            </div>
+          )}
 
         </div>
 
@@ -347,4 +351,3 @@ export default function TrackDetailPage() {
     </div>
   );
 }
-

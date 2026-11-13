@@ -7,11 +7,15 @@ import {
   X,
   Plus,
   Trash2,
+  ChevronDown,
+  ChevronUp,
   Image as ImageIcon,
-  Sparkles,
   Check,
   AlertCircle,
-  ShieldAlert,
+  Info,
+  Layers,
+  Package,
+  ShieldCheck,
 } from "lucide-react";
 
 interface VariantFormItem {
@@ -38,6 +42,20 @@ export function ProductFormModal({
   categories,
   onSuccess,
 }: ProductFormModalProps) {
+  // Collapsible section toggles
+  const [openSections, setOpenSections] = useState({
+    basic: true,
+    images: true,
+    variants: true,
+    inventory: false,
+    availability: false,
+  });
+
+  const toggleSection = (section: keyof typeof openSections) => {
+    setOpenSections((prev) => ({ ...prev, [section]: !prev[section] }));
+  };
+
+  // Form states
   const [name, setName] = useState("");
   const [subtitle, setSubtitle] = useState("");
   const [categoryId, setCategoryId] = useState(categories[0]?.id || "");
@@ -50,6 +68,7 @@ export function ProductFormModal({
   );
   const [requiresSpecialTransit, setRequiresSpecialTransit] = useState(true);
   const [isFeatured, setIsFeatured] = useState(false);
+  const [isActive, setIsActive] = useState(true);
   const [minOrderQty, setMinOrderQty] = useState(1);
   const [maxOrderQty, setMaxOrderQty] = useState(10);
 
@@ -69,14 +88,6 @@ export function ProductFormModal({
       price: 150,
       originalPrice: 190,
       stock: 25,
-    },
-    {
-      title: "Breeding Pair (1M + 1F)",
-      sku: "GUP-PAIR-01",
-      gender: "Pair",
-      price: 320,
-      originalPrice: 400,
-      stock: 12,
     },
   ]);
 
@@ -120,7 +131,7 @@ export function ProductFormModal({
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!name.trim() || !categoryId || variants.length === 0) {
-      setError("Please fill all required fields and provide at least one variant.");
+      setError("Please fill required fields and provide at least one variant.");
       return;
     }
 
@@ -131,10 +142,10 @@ export function ProductFormModal({
       const res = await createProductAction({
         name: name.trim(),
         subtitle: subtitle.trim() || undefined,
-        description: description.trim() || "Quality ornamental aquatic specimen from Telugu breeders.",
+        description: description.trim() || "Quality ornamental aquatic specimen.",
         careGuide: careGuide.trim() || undefined,
         categoryId,
-        isActive: true,
+        isActive,
         isFeatured,
         requiresSpecialTransit,
         minOrderQty,
@@ -170,14 +181,14 @@ export function ProductFormModal({
     <div className="fixed inset-0 z-50 flex items-end sm:items-center justify-center bg-black/60 backdrop-blur-xs p-0 sm:p-4 overflow-y-auto animate-in fade-in">
       <div className="bg-white w-full sm:max-w-2xl rounded-t-3xl sm:rounded-3xl shadow-2xl max-h-[92vh] flex flex-col overflow-hidden animate-in slide-in-from-bottom-4">
         {/* Header */}
-        <div className="px-5 py-4 border-b border-aquabark-border flex items-center justify-between bg-aquabark-bg">
+        <div className="px-6 py-4 border-b border-aquabark-border flex items-center justify-between bg-aquabark-bg">
           <div className="flex items-center gap-2.5">
-            <div className="w-9 h-9 rounded-xl bg-aquabark-dark flex items-center justify-center text-white">
+            <div className="w-9 h-9 rounded-2xl bg-aquabark-dark flex items-center justify-center text-white">
               <Plus className="w-5 h-5" />
             </div>
             <div>
-              <h3 className="font-bold text-aquabark-dark text-base">Add New Product</h3>
-              <p className="text-xs text-aquabark-muted">With Independent Variants & Stock</p>
+              <h3 className="font-bold text-aquabark-dark text-base">Add Product</h3>
+              <p className="text-xs text-slate-500">Organized in clean collapsible sections</p>
             </div>
           </div>
           <button
@@ -188,275 +199,361 @@ export function ProductFormModal({
           </button>
         </div>
 
-        {/* Form */}
-        <form onSubmit={handleSubmit} className="p-5 overflow-y-auto space-y-4 flex-1">
+        {/* Form Body */}
+        <form onSubmit={handleSubmit} className="p-6 overflow-y-auto space-y-4 flex-1 text-xs">
           {error && (
-            <div className="p-3 bg-rose-50 border border-rose-200 text-rose-700 text-xs rounded-xl flex items-center gap-2">
+            <div className="p-3 bg-rose-50 border border-rose-200 text-rose-700 rounded-2xl flex items-center gap-2">
               <AlertCircle className="w-4 h-4 shrink-0" />
               <span>{error}</span>
             </div>
           )}
 
-          {/* Name & Category */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-            <div>
-              <label className="block text-xs font-semibold text-slate-700 mb-1">
-                Product Name *
-              </label>
-              <input
-                type="text"
-                required
-                value={name}
-                onChange={(e) => setName(e.target.value)}
-                placeholder="e.g. Red Dragon Dumbo Ear Guppy"
-                className="w-full px-3 py-2 text-sm rounded-xl border border-slate-200 focus:outline-hidden focus:ring-2 focus:ring-aquabark-primary"
-              />
-            </div>
-
-            <div>
-              <label className="block text-xs font-semibold text-slate-700 mb-1">
-                Category *
-              </label>
-              <select
-                value={categoryId}
-                onChange={(e) => setCategoryId(e.target.value)}
-                className="w-full px-3 py-2 text-sm rounded-xl border border-slate-200 bg-white focus:outline-hidden focus:ring-2 focus:ring-aquabark-primary"
-              >
-                {categories.map((c) => (
-                  <option key={c.id} value={c.id}>
-                    {c.name}
-                  </option>
-                ))}
-              </select>
-            </div>
-          </div>
-
-          {/* Subtitle */}
-          <div>
-            <label className="block text-xs font-semibold text-slate-700 mb-1">
-              Subtitle / Line Strain
-            </label>
-            <input
-              type="text"
-              value={subtitle}
-              onChange={(e) => setSubtitle(e.target.value)}
-              placeholder="e.g. High Grade Livebearer | Pure Line Strain"
-              className="w-full px-3 py-2 text-sm rounded-xl border border-slate-200 focus:outline-hidden focus:ring-2 focus:ring-aquabark-primary"
-            />
-          </div>
-
-          {/* Description */}
-          <div>
-            <label className="block text-xs font-semibold text-slate-700 mb-1">
-              Description
-            </label>
-            <textarea
-              rows={2}
-              value={description}
-              onChange={(e) => setDescription(e.target.value)}
-              placeholder="Vibrant colors, active temperament, acclimated to local water conditions..."
-              className="w-full px-3 py-2 text-xs rounded-xl border border-slate-200 focus:outline-hidden focus:ring-2 focus:ring-aquabark-primary"
-            />
-          </div>
-
-          {/* Care Guide */}
-          <div>
-            <label className="block text-xs font-semibold text-slate-700 mb-1">
-              Care & Transit Guide (Water temp, pH, tank size, diet)
-            </label>
-            <input
-              type="text"
-              value={careGuide}
-              onChange={(e) => setCareGuide(e.target.value)}
-              className="w-full px-3 py-2 text-xs rounded-xl border border-slate-200 focus:outline-hidden focus:ring-2 focus:ring-aquabark-primary"
-            />
-          </div>
-
-          {/* Image URL with preview */}
-          <div>
-            <label className="block text-xs font-semibold text-slate-700 mb-1">
-              Product Image URL
-            </label>
-            <div className="flex gap-2">
-              <input
-                type="url"
-                required
-                value={imageUrl}
-                onChange={(e) => setImageUrl(e.target.value)}
-                placeholder="https://..."
-                className="flex-1 px-3 py-2 text-xs rounded-xl border border-slate-200 focus:outline-hidden focus:ring-2 focus:ring-aquabark-primary"
-              />
-              {imageUrl && (
-                <div className="w-10 h-10 rounded-xl overflow-hidden border border-slate-200 shrink-0">
-                  <img src={imageUrl} alt="Preview" className="w-full h-full object-cover" />
-                </div>
-              )}
-            </div>
-          </div>
-
-          {/* Flags */}
-          <div className="p-3 bg-slate-50 rounded-2xl border border-slate-100 grid grid-cols-2 gap-3 text-xs">
-            <label className="flex items-center gap-2 cursor-pointer">
-              <input
-                type="checkbox"
-                checked={requiresSpecialTransit}
-                onChange={(e) => setRequiresSpecialTransit(e.target.checked)}
-                className="w-4 h-4 rounded text-aquabark-dark"
-              />
-              <span className="font-semibold text-slate-700">Special Live Transit (Fish)</span>
-            </label>
-
-            <label className="flex items-center gap-2 cursor-pointer">
-              <input
-                type="checkbox"
-                checked={isFeatured}
-                onChange={(e) => setIsFeatured(e.target.checked)}
-                className="w-4 h-4 rounded text-aquabark-dark"
-              />
-              <span className="font-semibold text-slate-700">Featured on Homepage</span>
-            </label>
-          </div>
-
-          {/* Dynamic Variants Section */}
-          <div className="pt-2 border-t border-slate-100">
-            <div className="flex items-center justify-between mb-2">
-              <div>
-                <span className="text-xs font-bold text-aquabark-dark uppercase tracking-wider block">
-                  Product Variants & Pricing
-                </span>
-                <span className="text-[11px] text-slate-400">
-                  Each variant has its own price, SKU & live inventory
-                </span>
+          {/* 1. SECTION: BASIC INFO */}
+          <div className="border border-slate-200 rounded-2xl overflow-hidden bg-white">
+            <button
+              type="button"
+              onClick={() => toggleSection("basic")}
+              className="w-full px-4 py-3 bg-slate-50/80 hover:bg-slate-100/80 flex items-center justify-between font-bold text-slate-800 transition-colors cursor-pointer"
+            >
+              <div className="flex items-center gap-2">
+                <Info className="w-4 h-4 text-aquabark-dark" />
+                <span>1. Basic Info</span>
               </div>
-            </div>
+              {openSections.basic ? <ChevronUp className="w-4 h-4" /> : <ChevronDown className="w-4 h-4" />}
+            </button>
 
-            {/* Quick Preset Buttons */}
-            <div className="flex flex-wrap items-center gap-1.5 mb-3">
-              <span className="text-[10px] text-slate-500 font-medium">Add Quick:</span>
-              <button
-                type="button"
-                onClick={() => addVariantPreset("Male", "Male", undefined, 180)}
-                className="text-[11px] px-2 py-0.5 rounded-lg bg-blue-50 text-blue-700 border border-blue-200 hover:bg-blue-100"
-              >
-                + Male
-              </button>
-              <button
-                type="button"
-                onClick={() => addVariantPreset("Female", "Female", undefined, 150)}
-                className="text-[11px] px-2 py-0.5 rounded-lg bg-pink-50 text-pink-700 border border-pink-200 hover:bg-pink-100"
-              >
-                + Female
-              </button>
-              <button
-                type="button"
-                onClick={() => addVariantPreset("Pair (1M + 1F)", "Pair", undefined, 320)}
-                className="text-[11px] px-2 py-0.5 rounded-lg bg-purple-50 text-purple-700 border border-purple-200 hover:bg-purple-100"
-              >
-                + Pair
-              </button>
-              <button
-                type="button"
-                onClick={() => addVariantPreset("Trio (1M + 2F)", "Trio", undefined, 450)}
-                className="text-[11px] px-2 py-0.5 rounded-lg bg-indigo-50 text-indigo-700 border border-indigo-200 hover:bg-indigo-100"
-              >
-                + Trio
-              </button>
-              <button
-                type="button"
-                onClick={() => addVariantPreset("2-inch Pot", undefined, "2-inch Pot", 280)}
-                className="text-[11px] px-2 py-0.5 rounded-lg bg-emerald-50 text-emerald-700 border border-emerald-200 hover:bg-emerald-100"
-              >
-                + Pot
-              </button>
-            </div>
-
-            {/* Variant Cards List */}
-            <div className="space-y-3">
-              {variants.map((v, idx) => (
-                <div
-                  key={idx}
-                  className="p-3 bg-white rounded-2xl border border-slate-200 shadow-2xs space-y-2 relative"
-                >
-                  <div className="flex items-center justify-between gap-2">
-                    <span className="text-[11px] font-bold text-aquabark-dark bg-slate-100 px-2 py-0.5 rounded-md">
-                      #{idx + 1}
-                    </span>
+            {openSections.basic && (
+              <div className="p-4 space-y-3">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                  <div>
+                    <label className="block font-semibold text-slate-700 mb-1">
+                      Product Name *
+                    </label>
                     <input
                       type="text"
-                      placeholder="Variant Title (e.g. Male / 2-inch Pot)"
-                      value={v.title}
-                      onChange={(e) => updateVariant(idx, "title", e.target.value)}
-                      className="flex-1 text-xs font-bold text-slate-800 px-2.5 py-1.5 rounded-lg border border-slate-200"
+                      required
+                      value={name}
+                      onChange={(e) => setName(e.target.value)}
+                      placeholder="e.g. Red Dragon Dumbo Guppy"
+                      className="w-full px-3 py-2 rounded-xl border border-slate-200 focus:outline-hidden focus:ring-2 focus:ring-aquabark-primary"
                     />
-                    <button
-                      type="button"
-                      onClick={() => removeVariant(idx)}
-                      className="p-1.5 text-slate-400 hover:text-rose-600 rounded-lg hover:bg-rose-50"
-                      title="Remove variant"
-                    >
-                      <Trash2 className="w-4 h-4" />
-                    </button>
                   </div>
 
-                  <div className="grid grid-cols-4 gap-2 text-xs">
-                    <div>
-                      <span className="text-[10px] text-slate-500 block">Price (₹)</span>
-                      <input
-                        type="number"
-                        min="1"
-                        value={v.price}
-                        onChange={(e) => updateVariant(idx, "price", e.target.value)}
-                        className="w-full px-2 py-1 font-semibold rounded-lg border border-slate-200"
-                      />
-                    </div>
-                    <div>
-                      <span className="text-[10px] text-slate-500 block">Original ₹</span>
-                      <input
-                        type="number"
-                        min="0"
-                        value={v.originalPrice || ""}
-                        onChange={(e) => updateVariant(idx, "originalPrice", e.target.value)}
-                        className="w-full px-2 py-1 text-slate-600 rounded-lg border border-slate-200"
-                      />
-                    </div>
-                    <div>
-                      <span className="text-[10px] text-slate-500 block">Stock</span>
-                      <input
-                        type="number"
-                        min="0"
-                        value={v.stock}
-                        onChange={(e) => updateVariant(idx, "stock", e.target.value)}
-                        className="w-full px-2 py-1 font-bold text-aquabark-dark rounded-lg border border-slate-200"
-                      />
-                    </div>
-                    <div>
-                      <span className="text-[10px] text-slate-500 block">SKU</span>
-                      <input
-                        type="text"
-                        value={v.sku}
-                        onChange={(e) => updateVariant(idx, "sku", e.target.value)}
-                        className="w-full px-2 py-1 text-[11px] font-mono rounded-lg border border-slate-200"
-                      />
-                    </div>
+                  <div>
+                    <label className="block font-semibold text-slate-700 mb-1">
+                      Category *
+                    </label>
+                    <select
+                      value={categoryId}
+                      onChange={(e) => setCategoryId(e.target.value)}
+                      className="w-full px-3 py-2 rounded-xl border border-slate-200 bg-white focus:outline-hidden"
+                    >
+                      {categories.map((c) => (
+                        <option key={c.id} value={c.id}>
+                          {c.name}
+                        </option>
+                      ))}
+                    </select>
                   </div>
                 </div>
-              ))}
-            </div>
+
+                <div>
+                  <label className="block font-semibold text-slate-700 mb-1">
+                    Subtitle / Strain Details
+                  </label>
+                  <input
+                    type="text"
+                    value={subtitle}
+                    onChange={(e) => setSubtitle(e.target.value)}
+                    placeholder="e.g. Show-Grade Big Ear Strain | Active Swimmers"
+                    className="w-full px-3 py-2 rounded-xl border border-slate-200 focus:outline-hidden focus:ring-2 focus:ring-aquabark-primary"
+                  />
+                </div>
+
+                <div>
+                  <label className="block font-semibold text-slate-700 mb-1">
+                    Description
+                  </label>
+                  <textarea
+                    rows={2}
+                    value={description}
+                    onChange={(e) => setDescription(e.target.value)}
+                    placeholder="Exotic specimen bred in clean conditions, acclimated to local waters..."
+                    className="w-full px-3 py-2 rounded-xl border border-slate-200 focus:outline-hidden focus:ring-2 focus:ring-aquabark-primary"
+                  />
+                </div>
+
+                <div>
+                  <label className="block font-semibold text-slate-700 mb-1">
+                    Care & Acclimation Guide
+                  </label>
+                  <input
+                    type="text"
+                    value={careGuide}
+                    onChange={(e) => setCareGuide(e.target.value)}
+                    className="w-full px-3 py-2 rounded-xl border border-slate-200 focus:outline-hidden focus:ring-2 focus:ring-aquabark-primary"
+                  />
+                </div>
+              </div>
+            )}
+          </div>
+
+          {/* 2. SECTION: IMAGES */}
+          <div className="border border-slate-200 rounded-2xl overflow-hidden bg-white">
+            <button
+              type="button"
+              onClick={() => toggleSection("images")}
+              className="w-full px-4 py-3 bg-slate-50/80 hover:bg-slate-100/80 flex items-center justify-between font-bold text-slate-800 transition-colors cursor-pointer"
+            >
+              <div className="flex items-center gap-2">
+                <ImageIcon className="w-4 h-4 text-aquabark-dark" />
+                <span>2. Images</span>
+              </div>
+              {openSections.images ? <ChevronUp className="w-4 h-4" /> : <ChevronDown className="w-4 h-4" />}
+            </button>
+
+            {openSections.images && (
+              <div className="p-4 space-y-2">
+                <label className="block font-semibold text-slate-700">
+                  Primary Image URL
+                </label>
+                <div className="flex gap-3 items-center">
+                  <input
+                    type="url"
+                    required
+                    value={imageUrl}
+                    onChange={(e) => setImageUrl(e.target.value)}
+                    placeholder="https://images.unsplash.com/..."
+                    className="flex-1 px-3 py-2 rounded-xl border border-slate-200 focus:outline-hidden focus:ring-2 focus:ring-aquabark-primary"
+                  />
+                  {imageUrl && (
+                    <div className="w-12 h-12 rounded-xl overflow-hidden border border-slate-200 shrink-0">
+                      <img src={imageUrl} alt="Preview" className="w-full h-full object-cover" />
+                    </div>
+                  )}
+                </div>
+              </div>
+            )}
+          </div>
+
+          {/* 3. SECTION: VARIANTS & PRICING */}
+          <div className="border border-slate-200 rounded-2xl overflow-hidden bg-white">
+            <button
+              type="button"
+              onClick={() => toggleSection("variants")}
+              className="w-full px-4 py-3 bg-slate-50/80 hover:bg-slate-100/80 flex items-center justify-between font-bold text-slate-800 transition-colors cursor-pointer"
+            >
+              <div className="flex items-center gap-2">
+                <Layers className="w-4 h-4 text-aquabark-dark" />
+                <span>3. Variants & Pricing ({variants.length})</span>
+              </div>
+              {openSections.variants ? <ChevronUp className="w-4 h-4" /> : <ChevronDown className="w-4 h-4" />}
+            </button>
+
+            {openSections.variants && (
+              <div className="p-4 space-y-3">
+                <div className="flex flex-wrap items-center gap-1.5">
+                  <span className="text-[10px] text-slate-500 font-semibold mr-1">Quick Add:</span>
+                  <button
+                    type="button"
+                    onClick={() => addVariantPreset("Pair", "Pair", undefined, 320)}
+                    className="px-2 py-1 rounded-lg bg-blue-50 text-blue-700 border border-blue-200 font-semibold"
+                  >
+                    + Pair
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => addVariantPreset("Trio", "Trio", undefined, 450)}
+                    className="px-2 py-1 rounded-lg bg-purple-50 text-purple-700 border border-purple-200 font-semibold"
+                  >
+                    + Trio
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => addVariantPreset("2-inch Pot", undefined, "2-inch Pot", 280)}
+                    className="px-2 py-1 rounded-lg bg-emerald-50 text-emerald-700 border border-emerald-200 font-semibold"
+                  >
+                    + Pot
+                  </button>
+                </div>
+
+                <div className="space-y-2">
+                  {variants.map((v, idx) => (
+                    <div
+                      key={idx}
+                      className="p-3 bg-slate-50 rounded-2xl border border-slate-200 space-y-2"
+                    >
+                      <div className="flex items-center justify-between gap-2">
+                        <span className="font-bold text-slate-500">#{idx + 1}</span>
+                        <input
+                          type="text"
+                          value={v.title}
+                          onChange={(e) => updateVariant(idx, "title", e.target.value)}
+                          placeholder="Variant Title (e.g. Male)"
+                          className="flex-1 px-2.5 py-1.5 rounded-lg border border-slate-200 bg-white font-bold"
+                        />
+                        <button
+                          type="button"
+                          onClick={() => removeVariant(idx)}
+                          className="p-1 text-slate-400 hover:text-rose-600"
+                        >
+                          <Trash2 className="w-4 h-4" />
+                        </button>
+                      </div>
+
+                      <div className="grid grid-cols-4 gap-2">
+                        <div>
+                          <span className="text-[10px] text-slate-500 block">Selling Price (₹)</span>
+                          <input
+                            type="number"
+                            min="1"
+                            value={v.price}
+                            onChange={(e) => updateVariant(idx, "price", e.target.value)}
+                            className="w-full px-2 py-1 rounded-lg border border-slate-200 bg-white font-bold"
+                          />
+                        </div>
+                        <div>
+                          <span className="text-[10px] text-slate-500 block">Original Price (₹)</span>
+                          <input
+                            type="number"
+                            value={v.originalPrice || ""}
+                            onChange={(e) => updateVariant(idx, "originalPrice", e.target.value)}
+                            className="w-full px-2 py-1 rounded-lg border border-slate-200 bg-white"
+                          />
+                        </div>
+                        <div>
+                          <span className="text-[10px] text-slate-500 block">Stock Qty</span>
+                          <input
+                            type="number"
+                            min="0"
+                            value={v.stock}
+                            onChange={(e) => updateVariant(idx, "stock", e.target.value)}
+                            className="w-full px-2 py-1 rounded-lg border border-slate-200 bg-white font-bold"
+                          />
+                        </div>
+                        <div>
+                          <span className="text-[10px] text-slate-500 block">SKU</span>
+                          <input
+                            type="text"
+                            value={v.sku}
+                            onChange={(e) => updateVariant(idx, "sku", e.target.value)}
+                            className="w-full px-2 py-1 rounded-lg border border-slate-200 bg-white font-mono text-[11px]"
+                          />
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
+          </div>
+
+          {/* 4. SECTION: INVENTORY LIMITS */}
+          <div className="border border-slate-200 rounded-2xl overflow-hidden bg-white">
+            <button
+              type="button"
+              onClick={() => toggleSection("inventory")}
+              className="w-full px-4 py-3 bg-slate-50/80 hover:bg-slate-100/80 flex items-center justify-between font-bold text-slate-800 transition-colors cursor-pointer"
+            >
+              <div className="flex items-center gap-2">
+                <Package className="w-4 h-4 text-aquabark-dark" />
+                <span>4. Order Limits & Inventory Controls</span>
+              </div>
+              {openSections.inventory ? <ChevronUp className="w-4 h-4" /> : <ChevronDown className="w-4 h-4" />}
+            </button>
+
+            {openSections.inventory && (
+              <div className="p-4 grid grid-cols-2 gap-3">
+                <div>
+                  <label className="block font-semibold text-slate-700 mb-1">
+                    Min Order Qty
+                  </label>
+                  <input
+                    type="number"
+                    min="1"
+                    value={minOrderQty}
+                    onChange={(e) => setMinOrderQty(parseInt(e.target.value) || 1)}
+                    className="w-full px-3 py-2 rounded-xl border border-slate-200"
+                  />
+                </div>
+                <div>
+                  <label className="block font-semibold text-slate-700 mb-1">
+                    Max Order Qty
+                  </label>
+                  <input
+                    type="number"
+                    min="1"
+                    value={maxOrderQty}
+                    onChange={(e) => setMaxOrderQty(parseInt(e.target.value) || 10)}
+                    className="w-full px-3 py-2 rounded-xl border border-slate-200"
+                  />
+                </div>
+              </div>
+            )}
+          </div>
+
+          {/* 5. SECTION: AVAILABILITY & TRANSIT */}
+          <div className="border border-slate-200 rounded-2xl overflow-hidden bg-white">
+            <button
+              type="button"
+              onClick={() => toggleSection("availability")}
+              className="w-full px-4 py-3 bg-slate-50/80 hover:bg-slate-100/80 flex items-center justify-between font-bold text-slate-800 transition-colors cursor-pointer"
+            >
+              <div className="flex items-center gap-2">
+                <ShieldCheck className="w-4 h-4 text-aquabark-dark" />
+                <span>5. Availability & Special Transit</span>
+              </div>
+              {openSections.availability ? <ChevronUp className="w-4 h-4" /> : <ChevronDown className="w-4 h-4" />}
+            </button>
+
+            {openSections.availability && (
+              <div className="p-4 space-y-3">
+                <label className="flex items-center gap-2 cursor-pointer font-semibold text-slate-700">
+                  <input
+                    type="checkbox"
+                    checked={isActive}
+                    onChange={(e) => setIsActive(e.target.checked)}
+                    className="w-4 h-4 rounded text-aquabark-dark"
+                  />
+                  <span>Product is Active (Visible on storefront)</span>
+                </label>
+
+                <label className="flex items-center gap-2 cursor-pointer font-semibold text-slate-700">
+                  <input
+                    type="checkbox"
+                    checked={requiresSpecialTransit}
+                    onChange={(e) => setRequiresSpecialTransit(e.target.checked)}
+                    className="w-4 h-4 rounded text-aquabark-dark"
+                  />
+                  <span>Requires Special Live Transit (Oxygen pack & thermocol insulation)</span>
+                </label>
+
+                <label className="flex items-center gap-2 cursor-pointer font-semibold text-slate-700">
+                  <input
+                    type="checkbox"
+                    checked={isFeatured}
+                    onChange={(e) => setIsFeatured(e.target.checked)}
+                    className="w-4 h-4 rounded text-aquabark-dark"
+                  />
+                  <span>Feature on Homepage Showcase</span>
+                </label>
+              </div>
+            )}
           </div>
 
           {/* Submit */}
-          <div className="pt-3 pb-1">
+          <div className="pt-2">
             <button
               type="submit"
               disabled={isSubmitting}
               className="w-full py-3.5 bg-aquabark-dark hover:bg-aquabark-darker text-white font-bold text-sm rounded-2xl shadow-md transition-all flex items-center justify-center gap-2 cursor-pointer disabled:opacity-50"
             >
               {isSubmitting ? (
-                <span>Saving Product...</span>
+                <span>Publishing Product...</span>
               ) : (
                 <>
                   <Check className="w-5 h-5" />
-                  <span>Publish Product to Catalog</span>
+                  <span>Save & Publish Product</span>
                 </>
               )}
             </button>
